@@ -1,0 +1,15 @@
+:root{
+  --exotic-background: #0B100D;
+  --exotic-surface: #151D17;
+  --exotic-gold: #D6B76B;
+  --exotic-goldBright: #EED69A;
+  --exotic-ivory: #F1EBDD;
+  --exotic-muted: #A3AA9F;
+  --exotic-rose: #9B5C65;
+  --exotic-sage: #667B5B;
+  --exotic-content:1360px;
+  --exotic-section:clamp(88px,8vw,144px);
+  --exotic-gutter:clamp(20px,4vw,72px);
+  --exotic-ease:cubic-bezier(.22,1,.36,1);
+}
+@media(prefers-reduced-motion:reduce){[data-exotic-animated]{animation:none!important;transition:none!important}}

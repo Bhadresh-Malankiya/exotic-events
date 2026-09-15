@@ -1,0 +1,255 @@
+{
+  "archive_name": "Exotic_Events_Available_Assets",
+  "archive_type": "available_static_images_and_design_references",
+  "image_count": 22,
+  "not_included": [
+    "GLB/glTF 3D model source files",
+    "SVG vector asset source files",
+    "Lottie JSON/.lottie animations",
+    "Editable layered design files"
+  ],
+  "assets": [
+    {
+      "path": "public/assets/exotic/brand/original-logo-reference.png",
+      "category": "Brand",
+      "description": "Original supplied 310 x 204 raster logo reference. Not a vector master; retain its original proportions.",
+      "width": 310,
+      "height": 204,
+      "has_transparency": false,
+      "size_bytes": 105787,
+      "sha256": "ee13d32c2aa7c4b683b1105581f9d20ba5b00f9315a8c24443da24bb763e89fb",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/hero-designs/exotic_events_golden_wedding_elegance.png",
+      "category": "Hero designs",
+      "description": "Flattened AI-generated hero design reference, with text and controls baked into the image. Not a functioning webpage.",
+      "width": 1672,
+      "height": 941,
+      "has_transparency": false,
+      "size_bytes": 2041629,
+      "sha256": "45fc93046fd628e729d549ffa96c15c955f10211f332ce9703649f47ecf596a0",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/hero-designs/golden_mandap_by_the_sea.png",
+      "category": "Hero designs",
+      "description": "Flattened AI-generated hero design reference, with text and controls baked into the image. Not a functioning webpage.",
+      "width": 1672,
+      "height": 941,
+      "has_transparency": false,
+      "size_bytes": 2367920,
+      "sha256": "1fe0f98ef05e7aece66d19674b7aff907029056e629d067917304d5048044e99",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/hero-designs/exotic_luxury_events_showcase.png",
+      "category": "Hero designs",
+      "description": "Flattened AI-generated hero design reference, with text and controls baked into the image. Not a functioning webpage.",
+      "width": 1672,
+      "height": 941,
+      "has_transparency": false,
+      "size_bytes": 2052160,
+      "sha256": "f9eefc3028d9c3947871a6faadc5f4fafda904c67f5931b6692e47ce1ad0c806",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/hero-designs/luxury_navratri_celebration_entrance.png",
+      "category": "Hero designs",
+      "description": "Flattened AI-generated hero design reference, with text and controls baked into the image. Not a functioning webpage.",
+      "width": 1672,
+      "height": 941,
+      "has_transparency": false,
+      "size_bytes": 2350466,
+      "sha256": "3a549b2386d6e584335bdf72e45dacbed76157e01fd3a5be519f2c682b2a1220",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/hero-designs/luxury_destination_wedding_at_sunset.png",
+      "category": "Hero designs",
+      "description": "Flattened AI-generated hero design reference, with text and controls baked into the image. Not a functioning webpage.",
+      "width": 1672,
+      "height": 941,
+      "has_transparency": false,
+      "size_bytes": 2392327,
+      "sha256": "5b9b8debef5deae27e90f2ef92f0ea4d25b809f3580fa8b920687fc4343417e6",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/hero-designs/exotic_events_from_dream_to_reality.png",
+      "category": "Hero designs",
+      "description": "Flattened AI-generated hero design reference, with text and controls baked into the image. Not a functioning webpage.",
+      "width": 1672,
+      "height": 941,
+      "has_transparency": false,
+      "size_bytes": 2262635,
+      "sha256": "92723ba4a55768be51418c1ef2f47d61aa5c49e18f2514611ad8090840cda982",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/hero-designs/exotic_luxury_wedding_stage_decor.png",
+      "category": "Hero designs",
+      "description": "Flattened AI-generated hero design reference, with text and controls baked into the image. Not a functioning webpage.",
+      "width": 1672,
+      "height": 941,
+      "has_transparency": false,
+      "size_bytes": 2454699,
+      "sha256": "3d487c883054fa3cddf4ac4528ec4251d7460f1f26808ff0936d14e164ef623b",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/hero-designs/exotic_luxury_hospitality_experience.png",
+      "category": "Hero designs",
+      "description": "Flattened AI-generated hero design reference, with text and controls baked into the image. Not a functioning webpage.",
+      "width": 1672,
+      "height": 941,
+      "has_transparency": false,
+      "size_bytes": 2153736,
+      "sha256": "7f65bd4696b80e8aed8ec296e490bcf2688ed7c92e2b165f5d32062d86eaef60",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/hero-designs/exotic_events_golden_night_of_celebration.png",
+      "category": "Hero designs",
+      "description": "Flattened AI-generated hero design reference, with text and controls baked into the image. Not a functioning webpage.",
+      "width": 1672,
+      "height": 941,
+      "has_transparency": false,
+      "size_bytes": 2290339,
+      "sha256": "8955f0aa349b53371f02be13c039f1b49a7ce85908465fcc489d76b265447e97",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/hero-designs/luxury_golden_event_showcase.png",
+      "category": "Hero designs",
+      "description": "Flattened AI-generated hero design reference, with text and controls baked into the image. Not a functioning webpage.",
+      "width": 1672,
+      "height": 941,
+      "has_transparency": false,
+      "size_bytes": 2288872,
+      "sha256": "e1deb65c4ce674e95a2a392b5f0eb4291afb5f25ac0eadb4f8a66843e2f28bf3",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/full-homepage-designs/luxury_event_planning_landing_page.png",
+      "category": "Full homepage designs",
+      "description": "Flattened AI-generated full-page design reference. Business claims, client logos, reviews, and contact details in mockups are unverified.",
+      "width": 941,
+      "height": 1672,
+      "has_transparency": false,
+      "size_bytes": 2377144,
+      "sha256": "c5dcca1a0a8ba7aafc8e3c315faf7831e7f5f30ac3c2a0334945f8b71cc50069",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/full-homepage-designs/exotic_events_beyond_imagination.png",
+      "category": "Full homepage designs",
+      "description": "Flattened AI-generated full-page design reference. Business claims, client logos, reviews, and contact details in mockups are unverified.",
+      "width": 941,
+      "height": 1672,
+      "has_transparency": false,
+      "size_bytes": 2695298,
+      "sha256": "33f45503c5a5544b2e7385bd3af9bb5fda2b9ee61af852b861850010c215ef48",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/full-homepage-designs/exotic_weddings_beyond_boundaries.png",
+      "category": "Full homepage designs",
+      "description": "Flattened AI-generated full-page design reference. Business claims, client logos, reviews, and contact details in mockups are unverified.",
+      "width": 941,
+      "height": 1672,
+      "has_transparency": false,
+      "size_bytes": 2688247,
+      "sha256": "4fcb520ea3949d45902a3e4a9c37f83e2afe28b7e3adcf01ca6f5fb358340696",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/full-homepage-designs/exotic_events_luxury_global_homepage.png",
+      "category": "Full homepage designs",
+      "description": "Flattened AI-generated full-page design reference. Business claims, client logos, reviews, and contact details in mockups are unverified.",
+      "width": 941,
+      "height": 1672,
+      "has_transparency": false,
+      "size_bytes": 2557370,
+      "sha256": "889539d95e97b1b6b5ccc1f15da74ef9fef3833ed946282245526b751a92f141",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/full-homepage-designs/exotic_celebrations_beyond_ordinary.png",
+      "category": "Full homepage designs",
+      "description": "Flattened AI-generated full-page design reference. Business claims, client logos, reviews, and contact details in mockups are unverified.",
+      "width": 941,
+      "height": 1672,
+      "has_transparency": false,
+      "size_bytes": 2751609,
+      "sha256": "6127b0476634d0efc78a473a230b7b22cbca79424e75297f4cc162c833924aff",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/library-previews/asset-kit-concept-board.png",
+      "category": "Library previews",
+      "description": "Concept collage only. The GLB/SVG/JSON filenames depicted in this image are labels, not included source assets.",
+      "width": 1536,
+      "height": 1024,
+      "has_transparency": true,
+      "size_bytes": 2673725,
+      "sha256": "4eb7182e7933cc0a6462cecd2ad45a8c031f2903dc5af390cc70405506cda5bf",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/library-previews/catalogue-desktop.png",
+      "category": "Library previews",
+      "description": "Static catalogue screenshot. Its interface and displayed source assets are not embedded as usable files.",
+      "width": 1440,
+      "height": 1000,
+      "has_transparency": false,
+      "size_bytes": 314619,
+      "sha256": "e968e4e52973d75b75f2366b0b2596334dbe50f6a7a1a7f9bb1d898304c88902",
+      "kind": "static_image"
+    },
+    {
+      "path": "references/library-previews/3d-models-contact-sheet.jpg",
+      "category": "Library previews",
+      "description": "Static contact sheet of model previews. It contains no editable 3D geometry.",
+      "width": 1680,
+      "height": 3112,
+      "has_transparency": false,
+      "size_bytes": 510974,
+      "sha256": "74ac9a51e09102dcca84e6876a9dcc47557477965fe10a16cf08d09bd37b278b",
+      "kind": "static_image"
+    },
+    {
+      "path": "public/assets/exotic/model-posters/scene-wedding-portal-1024.png",
+      "category": "Model posters",
+      "description": "Static 1024 x 1024 render of a wedding portal. PNG poster only, not a GLB model.",
+      "width": 1024,
+      "height": 1024,
+      "has_transparency": true,
+      "size_bytes": 421361,
+      "sha256": "d7c6aa9b8b14e18f5d5c486d226687340358964dc8229fe81c4c6a53b81b6d5a",
+      "kind": "static_image"
+    },
+    {
+      "path": "public/assets/exotic/model-posters/scene-wedding-portal-680.png",
+      "category": "Model posters",
+      "description": "Separate static 680 x 680 wedding-portal render. PNG poster only, not a GLB model.",
+      "width": 680,
+      "height": 680,
+      "has_transparency": true,
+      "size_bytes": 258696,
+      "sha256": "9a8567c48c37dad9a1646ab11c076f041bfdff59441a1c4b060c6e4d75c0b457",
+      "kind": "static_image"
+    },
+    {
+      "path": "public/assets/exotic/loader-posters/exotic-emblem-orbit.png",
+      "category": "Loader poster",
+      "description": "Static 256 x 256 loader preview only. No Lottie animation data or playback is contained in this PNG.",
+      "width": 256,
+      "height": 256,
+      "has_transparency": true,
+      "size_bytes": 17900,
+      "sha256": "683add536fc46db4e781d699d95f1256832aa68caa2ffd3c2e690d2369efabc2",
+      "kind": "static_image"
+    }
+  ]
+}

@@ -1,0 +1,982 @@
+[
+  {
+    "id": "pearl-blossom",
+    "title": "Pearl Blossom",
+    "path": "public/assets/exotic/models/pearl-blossom.glb",
+    "triangles": 4160,
+    "nodes": 2,
+    "bounds": [
+      [
+        -0.25996258645126047,
+        -0.2778544549718197,
+        -0.045
+      ],
+      [
+        0.28500000000000003,
+        0.2778544549718197,
+        0.13
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/pearl-blossom.glb",
+    "mobileTriangles": 1040,
+    "poster": "public/assets/exotic/model-renders/pearl-blossom.png"
+  },
+  {
+    "id": "gold-blossom",
+    "title": "Gold Blossom",
+    "path": "public/assets/exotic/models/gold-blossom.glb",
+    "triangles": 4160,
+    "nodes": 2,
+    "bounds": [
+      [
+        -0.25996258645126047,
+        -0.2778544549718197,
+        -0.045
+      ],
+      [
+        0.28500000000000003,
+        0.2778544549718197,
+        0.13
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/gold-blossom.glb",
+    "mobileTriangles": 1040,
+    "poster": "public/assets/exotic/model-renders/gold-blossom.png"
+  },
+  {
+    "id": "botanical-leaf",
+    "title": "Botanical Leaf",
+    "path": "public/assets/exotic/models/botanical-leaf.glb",
+    "triangles": 132,
+    "nodes": 2,
+    "bounds": [
+      [
+        -0.18,
+        0.0,
+        -0.025
+      ],
+      [
+        0.18,
+        0.8018850915445913,
+        0.14570633909777095
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/botanical-leaf.glb",
+    "mobileTriangles": 68,
+    "poster": "public/assets/exotic/model-renders/botanical-leaf.png"
+  },
+  {
+    "id": "portal-arch",
+    "title": "Portal Arch",
+    "path": "public/assets/exotic/models/portal-arch.glb",
+    "triangles": 1484,
+    "nodes": 2,
+    "bounds": [
+      [
+        -1.625,
+        0.0,
+        -0.24
+      ],
+      [
+        1.625,
+        3.0946255785957493,
+        0.24
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/portal-arch.glb",
+    "mobileTriangles": 420,
+    "poster": "public/assets/exotic/model-renders/portal-arch.png"
+  },
+  {
+    "id": "portal-arch-triple",
+    "title": "Portal Arch Triple",
+    "path": "public/assets/exotic/models/portal-arch-triple.glb",
+    "triangles": 4452,
+    "nodes": 2,
+    "bounds": [
+      [
+        -1.675,
+        0.0,
+        -0.6799999999999999
+      ],
+      [
+        1.675,
+        3.144612622837817,
+        0.24
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/portal-arch-triple.glb",
+    "mobileTriangles": 1260,
+    "poster": "public/assets/exotic/model-renders/portal-arch-triple.png"
+  },
+  {
+    "id": "floral-arch",
+    "title": "Floral Arch",
+    "path": "public/assets/exotic/models/floral-arch.glb",
+    "triangles": 148932,
+    "nodes": 7,
+    "bounds": [
+      [
+        -1.9151769771996427,
+        0.0,
+        -0.24
+      ],
+      [
+        1.9117475012611953,
+        3.560988143681989,
+        0.24
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/floral-arch.glb",
+    "mobileTriangles": 28072,
+    "poster": "public/assets/exotic/model-renders/floral-arch.png"
+  },
+  {
+    "id": "sculptural-ribbon",
+    "title": "Sculptural Ribbon",
+    "path": "public/assets/exotic/models/sculptural-ribbon.glb",
+    "triangles": 340,
+    "nodes": 1,
+    "bounds": [
+      [
+        -0.8579042923990401,
+        -0.03,
+        -0.43831502514530796
+      ],
+      [
+        0.8130155934699426,
+        2.8299999999999996,
+        0.34120415439114987
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/sculptural-ribbon.glb",
+    "mobileTriangles": 110,
+    "poster": "public/assets/exotic/model-renders/sculptural-ribbon.png"
+  },
+  {
+    "id": "ribbon-loop",
+    "title": "Ribbon Loop",
+    "path": "public/assets/exotic/models/ribbon-loop.glb",
+    "triangles": 340,
+    "nodes": 1,
+    "bounds": [
+      [
+        -1.26,
+        -0.059767780622951794,
+        -0.23323571347138333
+      ],
+      [
+        1.26,
+        2.659767780622952,
+        0.23323571347138333
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/ribbon-loop.glb",
+    "mobileTriangles": 110,
+    "poster": "public/assets/exotic/model-renders/ribbon-loop.png"
+  },
+  {
+    "id": "podium-single",
+    "title": "Podium Single",
+    "path": "public/assets/exotic/models/podium-single.glb",
+    "triangles": 480,
+    "nodes": 3,
+    "bounds": [
+      [
+        -0.68,
+        -5.551115123125783e-17,
+        -0.68
+      ],
+      [
+        0.68,
+        0.65,
+        0.68
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/podium-single.glb",
+    "mobileTriangles": 192,
+    "poster": "public/assets/exotic/model-renders/podium-single.png"
+  },
+  {
+    "id": "podium-trio",
+    "title": "Podium Trio",
+    "path": "public/assets/exotic/models/podium-trio.glb",
+    "triangles": 1440,
+    "nodes": 3,
+    "bounds": [
+      [
+        -1.292,
+        -6.38378239159465e-17,
+        -1.082
+      ],
+      [
+        1.428,
+        0.7474999999999999,
+        0.5780000000000001
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/podium-trio.glb",
+    "mobileTriangles": 576,
+    "poster": "public/assets/exotic/model-renders/podium-trio.png"
+  },
+  {
+    "id": "ceremony-stage",
+    "title": "Ceremony Stage",
+    "path": "public/assets/exotic/models/ceremony-stage.glb",
+    "triangles": 5760,
+    "nodes": 2,
+    "bounds": [
+      [
+        -1.9667170517268844,
+        0.034999999999999865,
+        -1.9667983976754004
+      ],
+      [
+        1.9679882657170142,
+        0.523,
+        1.9667983976754004
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/ceremony-stage.glb",
+    "mobileTriangles": 1632,
+    "poster": "public/assets/exotic/model-renders/ceremony-stage.png"
+  },
+  {
+    "id": "candle-single",
+    "title": "Candle Single",
+    "path": "public/assets/exotic/models/candle-single.glb",
+    "triangles": 800,
+    "nodes": 4,
+    "bounds": [
+      [
+        -0.165,
+        0.009999999999999992,
+        -0.165
+      ],
+      [
+        0.165,
+        0.992,
+        0.165
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/candle-single.glb",
+    "mobileTriangles": 272,
+    "poster": "public/assets/exotic/model-renders/candle-single.png"
+  },
+  {
+    "id": "candle-trio",
+    "title": "Candle Trio",
+    "path": "public/assets/exotic/models/candle-trio.glb",
+    "triangles": 2400,
+    "nodes": 4,
+    "bounds": [
+      [
+        -0.3855,
+        0.006999999999999993,
+        -0.29800000000000004
+      ],
+      [
+        0.4985,
+        1.1904,
+        0.2985
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/candle-trio.glb",
+    "mobileTriangles": 816,
+    "poster": "public/assets/exotic/model-renders/candle-trio.png"
+  },
+  {
+    "id": "heritage-lantern",
+    "title": "Heritage Lantern",
+    "path": "public/assets/exotic/models/heritage-lantern.glb",
+    "triangles": 2756,
+    "nodes": 7,
+    "bounds": [
+      [
+        -0.4,
+        0.0049999999999999975,
+        -0.4
+      ],
+      [
+        0.4,
+        1.3019833750775935,
+        0.4
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/heritage-lantern.glb",
+    "mobileTriangles": 884,
+    "poster": "public/assets/exotic/model-renders/heritage-lantern.png"
+  },
+  {
+    "id": "crystal-chandelier",
+    "title": "Crystal Chandelier",
+    "path": "public/assets/exotic/models/crystal-chandelier.glb",
+    "triangles": 18760,
+    "nodes": 7,
+    "bounds": [
+      [
+        -0.8062,
+        0.65,
+        -0.8062
+      ],
+      [
+        0.8062,
+        2.1,
+        0.8062
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/crystal-chandelier.glb",
+    "mobileTriangles": 5752,
+    "poster": "public/assets/exotic/model-renders/crystal-chandelier.png"
+  },
+  {
+    "id": "suspended-halo",
+    "title": "Suspended Halo",
+    "path": "public/assets/exotic/models/suspended-halo.glb",
+    "triangles": 11040,
+    "nodes": 3,
+    "bounds": [
+      [
+        -1.085292031593189,
+        0.6589999999999999,
+        -1.084061315241574
+      ],
+      [
+        1.0859765314340284,
+        2.003770022642526,
+        1.084061315241574
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/suspended-halo.glb",
+    "mobileTriangles": 3168,
+    "poster": "public/assets/exotic/model-renders/suspended-halo.png"
+  },
+  {
+    "id": "hospitality-cloche",
+    "title": "Hospitality Cloche",
+    "path": "public/assets/exotic/models/hospitality-cloche.glb",
+    "triangles": 1376,
+    "nodes": 3,
+    "bounds": [
+      [
+        -0.64,
+        0.017499999999999964,
+        -0.64
+      ],
+      [
+        0.64,
+        0.94,
+        0.64
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/hospitality-cloche.glb",
+    "mobileTriangles": 464,
+    "poster": "public/assets/exotic/model-renders/hospitality-cloche.png"
+  },
+  {
+    "id": "champagne-flute",
+    "title": "Champagne Flute",
+    "path": "public/assets/exotic/models/champagne-flute.glb",
+    "triangles": 1344,
+    "nodes": 1,
+    "bounds": [
+      [
+        -0.2,
+        0.0,
+        -0.2
+      ],
+      [
+        0.2,
+        1.02,
+        0.2
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/champagne-flute.glb",
+    "mobileTriangles": 480,
+    "poster": "public/assets/exotic/model-renders/champagne-flute.png"
+  },
+  {
+    "id": "fluted-vase",
+    "title": "Fluted Vase",
+    "path": "public/assets/exotic/models/fluted-vase.glb",
+    "triangles": 1232,
+    "nodes": 1,
+    "bounds": [
+      [
+        -0.26,
+        0.0,
+        -0.26
+      ],
+      [
+        0.26,
+        1.04,
+        0.26
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/fluted-vase.glb",
+    "mobileTriangles": 440,
+    "poster": "public/assets/exotic/model-renders/fluted-vase.png"
+  },
+  {
+    "id": "floral-centerpiece",
+    "title": "Floral Centerpiece",
+    "path": "public/assets/exotic/models/floral-centerpiece.glb",
+    "triangles": 38672,
+    "nodes": 3,
+    "bounds": [
+      [
+        -0.510486386072381,
+        0.0,
+        -0.504982884633469
+      ],
+      [
+        0.510486386072381,
+        1.4105,
+        0.504982884633469
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/floral-centerpiece.glb",
+    "mobileTriangles": 9800,
+    "poster": "public/assets/exotic/model-renders/floral-centerpiece.png"
+  },
+  {
+    "id": "invitation-suite",
+    "title": "Invitation Suite",
+    "path": "public/assets/exotic/models/invitation-suite.glb",
+    "triangles": 1956,
+    "nodes": 5,
+    "bounds": [
+      [
+        -0.46,
+        0.011000000000000001,
+        -0.325
+      ],
+      [
+        0.46,
+        0.097,
+        0.325
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/invitation-suite.glb",
+    "mobileTriangles": 580,
+    "poster": "public/assets/exotic/model-renders/invitation-suite.png"
+  },
+  {
+    "id": "guest-chair",
+    "title": "Guest Chair",
+    "path": "public/assets/exotic/models/guest-chair.glb",
+    "triangles": 324,
+    "nodes": 5,
+    "bounds": [
+      [
+        -0.30300000000000005,
+        0.0,
+        -0.29000000000000004
+      ],
+      [
+        0.30300000000000005,
+        1.4129999999999998,
+        0.275
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/guest-chair.glb",
+    "mobileTriangles": 204,
+    "poster": "public/assets/exotic/model-renders/guest-chair.png"
+  },
+  {
+    "id": "cocktail-table",
+    "title": "Cocktail Table",
+    "path": "public/assets/exotic/models/cocktail-table.glb",
+    "triangles": 2240,
+    "nodes": 4,
+    "bounds": [
+      [
+        -0.6665651796249145,
+        0.009999999999999981,
+        -0.6660593824372365
+      ],
+      [
+        0.6669889176216245,
+        1.057,
+        0.6660593824372365
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/cocktail-table.glb",
+    "mobileTriangles": 672,
+    "poster": "public/assets/exotic/model-renders/cocktail-table.png"
+  },
+  {
+    "id": "dandiya-pair",
+    "title": "Dandiya Pair",
+    "path": "public/assets/exotic/models/dandiya-pair.glb",
+    "triangles": 4480,
+    "nodes": 3,
+    "bounds": [
+      [
+        -0.47292395757458927,
+        -0.05292395757458931,
+        -0.053
+      ],
+      [
+        0.47292395757458927,
+        1.5623659640260303,
+        0.153
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/dandiya-pair.glb",
+    "mobileTriangles": 1600,
+    "poster": "public/assets/exotic/model-renders/dandiya-pair.png"
+  },
+  {
+    "id": "festive-dhol",
+    "title": "Festive Dhol",
+    "path": "public/assets/exotic/models/festive-dhol.glb",
+    "triangles": 4848,
+    "nodes": 4,
+    "bounds": [
+      [
+        -0.43,
+        0.0,
+        -0.43
+      ],
+      [
+        0.43,
+        1.045,
+        0.43
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/festive-dhol.glb",
+    "mobileTriangles": 1616,
+    "poster": "public/assets/exotic/model-renders/festive-dhol.png"
+  },
+  {
+    "id": "festive-umbrella",
+    "title": "Festive Umbrella",
+    "path": "public/assets/exotic/models/festive-umbrella.glb",
+    "triangles": 7152,
+    "nodes": 6,
+    "bounds": [
+      [
+        -0.745,
+        0.0,
+        -0.745
+      ],
+      [
+        0.745,
+        2.0408384817249403,
+        0.745
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/festive-umbrella.glb",
+    "mobileTriangles": 2296,
+    "poster": "public/assets/exotic/model-renders/festive-umbrella.png"
+  },
+  {
+    "id": "marigold-garland",
+    "title": "Marigold Garland",
+    "path": "public/assets/exotic/models/marigold-garland.glb",
+    "triangles": 105716,
+    "nodes": 4,
+    "bounds": [
+      [
+        -1.5883872793934286,
+        0.2014156216211767,
+        -0.04775
+      ],
+      [
+        1.593296352792899,
+        1.0967828511530784,
+        0.0442
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/marigold-garland.glb",
+    "mobileTriangles": 16144,
+    "poster": "public/assets/exotic/model-renders/marigold-garland.png"
+  },
+  {
+    "id": "celebration-crown",
+    "title": "Celebration Crown",
+    "path": "public/assets/exotic/models/celebration-crown.glb",
+    "triangles": 3824,
+    "nodes": 3,
+    "bounds": [
+      [
+        -0.635,
+        0.03,
+        -0.59
+      ],
+      [
+        0.635,
+        0.8250000000000001,
+        0.59
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/celebration-crown.glb",
+    "mobileTriangles": 1032,
+    "poster": "public/assets/exotic/model-renders/celebration-crown.png"
+  },
+  {
+    "id": "gold-sparkle",
+    "title": "Gold Sparkle",
+    "path": "public/assets/exotic/models/gold-sparkle.glb",
+    "triangles": 16,
+    "nodes": 1,
+    "bounds": [
+      [
+        -0.48,
+        0.0,
+        -0.11
+      ],
+      [
+        0.48,
+        1.2,
+        0.11
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/gold-sparkle.glb",
+    "mobileTriangles": 16,
+    "poster": "public/assets/exotic/model-renders/gold-sparkle.png"
+  },
+  {
+    "id": "wedding-rings",
+    "title": "Wedding Rings",
+    "path": "public/assets/exotic/models/wedding-rings.glb",
+    "triangles": 3520,
+    "nodes": 2,
+    "bounds": [
+      [
+        -0.7675078039841927,
+        0.024485715073965214,
+        -0.16803675712325256
+      ],
+      [
+        0.7674765658687827,
+        1.107555326149537,
+        0.4011999976479115
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/wedding-rings.glb",
+    "mobileTriangles": 960,
+    "poster": "public/assets/exotic/model-renders/wedding-rings.png"
+  },
+  {
+    "id": "silk-drapery",
+    "title": "Silk Drapery",
+    "path": "public/assets/exotic/models/silk-drapery.glb",
+    "triangles": 1920,
+    "nodes": 1,
+    "bounds": [
+      [
+        -1.3,
+        0.0,
+        -0.24
+      ],
+      [
+        1.3,
+        3.0,
+        0.24
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/silk-drapery.glb",
+    "mobileTriangles": 768,
+    "poster": "public/assets/exotic/model-renders/silk-drapery.png"
+  },
+  {
+    "id": "mandap-pavilion",
+    "title": "Mandap Pavilion",
+    "path": "public/assets/exotic/models/mandap-pavilion.glb",
+    "triangles": 43180,
+    "nodes": 14,
+    "bounds": [
+      [
+        -1.9667170517268844,
+        0.034999999999999865,
+        -1.9667983976754004
+      ],
+      [
+        1.9679882657170142,
+        3.1056399004690016,
+        1.9667983976754004
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/mandap-pavilion.glb",
+    "mobileTriangles": 12372,
+    "poster": "public/assets/exotic/model-renders/mandap-pavilion.png"
+  },
+  {
+    "id": "scene-wedding-portal",
+    "title": "Scene Wedding Portal",
+    "path": "public/assets/exotic/models/scene-wedding-portal.glb",
+    "triangles": 255596,
+    "nodes": 17,
+    "bounds": [
+      [
+        -1.9773404702506667,
+        0.034999999999999865,
+        -1.9667983976754004
+      ],
+      [
+        1.9773404702506667,
+        3.3768399221296908,
+        1.9667983976754004
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/scene-wedding-portal.glb",
+    "mobileTriangles": 56688,
+    "poster": "public/assets/exotic/model-renders/scene-wedding-portal.png"
+  },
+  {
+    "id": "scene-festive-entry",
+    "title": "Scene Festive Entry",
+    "path": "public/assets/exotic/models/scene-festive-entry.glb",
+    "triangles": 131864,
+    "nodes": 23,
+    "bounds": [
+      [
+        -2.4215,
+        0.0,
+        -0.27149999999999996
+      ],
+      [
+        2.4215,
+        3.0946255785957493,
+        0.7715
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/scene-festive-entry.glb",
+    "mobileTriangles": 24540,
+    "poster": "public/assets/exotic/model-renders/scene-festive-entry.png"
+  },
+  {
+    "id": "scene-hospitality",
+    "title": "Scene Hospitality",
+    "path": "public/assets/exotic/models/scene-hospitality.glb",
+    "triangles": 52600,
+    "nodes": 15,
+    "bounds": [
+      [
+        -1.5324458541325927,
+        0.0,
+        -0.9756551837174166
+      ],
+      [
+        1.5324458541325927,
+        3.053393020378273,
+        0.9756551837174166
+      ]
+    ],
+    "type": "model",
+    "units": "metres",
+    "upAxis": "+Y",
+    "front": "+Z",
+    "style": "original procedural stylized geometry",
+    "animated": false,
+    "mobilePath": "public/assets/exotic/models/mobile/scene-hospitality.glb",
+    "mobileTriangles": 14048,
+    "poster": "public/assets/exotic/model-renders/scene-hospitality.png"
+  }
+]

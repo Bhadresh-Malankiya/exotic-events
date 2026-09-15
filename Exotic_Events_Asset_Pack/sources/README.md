@@ -1,0 +1,3 @@
+# Optional source generators
+
+The assets already exist; running these builders is not required to use them. Builders target the containing pack folder. Run in order: build_models.py; build_vectors.py; build_animations.py; render_animations.py; finish_visuals.py; build_catalogue.py. The original branding input is logo-input.png. Installed package versions used in this session are recorded in requirements.txt. Contact sheets use a Linux DejaVu font path; change the path locally for another platform. No font is bundled. VTK needs a working offscreen render backend. Generator output may differ slightly across software versions and graphics systems. The sources do not include prior proprietary authoring files such as .blend or .aep.

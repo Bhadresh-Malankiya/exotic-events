@@ -1,0 +1,582 @@
+{
+  "checks": {
+    "glb": {
+      "count": 74,
+      "details": [
+        {
+          "file": "public/assets/exotic/models/invitation-suite.glb",
+          "triangles": 1956,
+          "clips": 0,
+          "bytes": 51132,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/guest-chair.glb",
+          "triangles": 324,
+          "clips": 0,
+          "bytes": 12436,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/heritage-lantern.glb",
+          "triangles": 2756,
+          "clips": 0,
+          "bytes": 71504,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/scene-festive-entry.glb",
+          "triangles": 131864,
+          "clips": 0,
+          "bytes": 3122588,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/portal-arch-triple.glb",
+          "triangles": 4452,
+          "clips": 0,
+          "bytes": 109536,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/podium-single.glb",
+          "triangles": 480,
+          "clips": 0,
+          "bytes": 10916,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/dandiya-pair.glb",
+          "triangles": 4480,
+          "clips": 0,
+          "bytes": 111944,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/champagne-flute.glb",
+          "triangles": 1344,
+          "clips": 0,
+          "bytes": 34860,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/hospitality-cloche.glb",
+          "triangles": 1376,
+          "clips": 0,
+          "bytes": 37508,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/botanical-leaf.glb",
+          "triangles": 132,
+          "clips": 0,
+          "bytes": 5924,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/sculptural-ribbon.glb",
+          "triangles": 340,
+          "clips": 0,
+          "bytes": 13572,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/wedding-rings.glb",
+          "triangles": 3520,
+          "clips": 0,
+          "bytes": 65404,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/candle-trio.glb",
+          "triangles": 2400,
+          "clips": 0,
+          "bytes": 50468,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/festive-dhol.glb",
+          "triangles": 4848,
+          "clips": 0,
+          "bytes": 122460,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/ceremony-stage.glb",
+          "triangles": 5760,
+          "clips": 0,
+          "bytes": 140692,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/suspended-halo.glb",
+          "triangles": 11040,
+          "clips": 0,
+          "bytes": 205456,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/silk-drapery.glb",
+          "triangles": 1920,
+          "clips": 0,
+          "bytes": 49568,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/scene-hospitality.glb",
+          "triangles": 52600,
+          "clips": 0,
+          "bytes": 1215828,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/floral-centerpiece.glb",
+          "triangles": 38672,
+          "clips": 0,
+          "bytes": 938016,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/marigold-garland.glb",
+          "triangles": 105716,
+          "clips": 0,
+          "bytes": 2563296,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/candle-single.glb",
+          "triangles": 800,
+          "clips": 0,
+          "bytes": 19560,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/fluted-vase.glb",
+          "triangles": 1232,
+          "clips": 0,
+          "bytes": 32164,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mandap-pavilion.glb",
+          "triangles": 43180,
+          "clips": 0,
+          "bytes": 1009452,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/pearl-blossom.glb",
+          "triangles": 4160,
+          "clips": 0,
+          "bytes": 102428,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/celebration-crown.glb",
+          "triangles": 3824,
+          "clips": 0,
+          "bytes": 96836,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/gold-sparkle.glb",
+          "triangles": 16,
+          "clips": 0,
+          "bytes": 1596,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/podium-trio.glb",
+          "triangles": 1440,
+          "clips": 0,
+          "bytes": 26396,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/scene-wedding-portal.glb",
+          "triangles": 255596,
+          "clips": 0,
+          "bytes": 6143800,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/cocktail-table.glb",
+          "triangles": 2240,
+          "clips": 0,
+          "bytes": 53976,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/crystal-chandelier.glb",
+          "triangles": 18760,
+          "clips": 0,
+          "bytes": 430016,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/portal-arch.glb",
+          "triangles": 1484,
+          "clips": 0,
+          "bytes": 37996,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/festive-umbrella.glb",
+          "triangles": 7152,
+          "clips": 0,
+          "bytes": 179864,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/ribbon-loop.glb",
+          "triangles": 340,
+          "clips": 0,
+          "bytes": 13528,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/floral-arch.glb",
+          "triangles": 148932,
+          "clips": 0,
+          "bytes": 3610132,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/gold-blossom.glb",
+          "triangles": 4160,
+          "clips": 0,
+          "bytes": 102616,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/animated/sculptural-ribbon.glb",
+          "triangles": 340,
+          "clips": 1,
+          "bytes": 14072,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/animated/wedding-rings.glb",
+          "triangles": 3520,
+          "clips": 1,
+          "bytes": 65924,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/animated/gold-sparkle.glb",
+          "triangles": 16,
+          "clips": 1,
+          "bytes": 2112,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/animated/crystal-chandelier.glb",
+          "triangles": 18760,
+          "clips": 1,
+          "bytes": 430544,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/invitation-suite.glb",
+          "triangles": 580,
+          "clips": 0,
+          "bytes": 18108,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/guest-chair.glb",
+          "triangles": 204,
+          "clips": 0,
+          "bytes": 9556,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/heritage-lantern.glb",
+          "triangles": 884,
+          "clips": 0,
+          "bytes": 27704,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/scene-festive-entry.glb",
+          "triangles": 24540,
+          "clips": 0,
+          "bytes": 600244,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/portal-arch-triple.glb",
+          "triangles": 1260,
+          "clips": 0,
+          "bytes": 32920,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/podium-single.glb",
+          "triangles": 192,
+          "clips": 0,
+          "bytes": 6308,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/dandiya-pair.glb",
+          "triangles": 1600,
+          "clips": 0,
+          "bytes": 42808,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/champagne-flute.glb",
+          "triangles": 480,
+          "clips": 0,
+          "bytes": 13256,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/hospitality-cloche.glb",
+          "triangles": 464,
+          "clips": 0,
+          "bytes": 14740,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/botanical-leaf.glb",
+          "triangles": 68,
+          "clips": 0,
+          "bytes": 4148,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/sculptural-ribbon.glb",
+          "triangles": 110,
+          "clips": 0,
+          "bytes": 5296,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/wedding-rings.glb",
+          "triangles": 960,
+          "clips": 0,
+          "bytes": 19320,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/candle-trio.glb",
+          "triangles": 816,
+          "clips": 0,
+          "bytes": 19356,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/festive-dhol.glb",
+          "triangles": 1616,
+          "clips": 0,
+          "bytes": 44020,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/ceremony-stage.glb",
+          "triangles": 1632,
+          "clips": 0,
+          "bytes": 41612,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/suspended-halo.glb",
+          "triangles": 3168,
+          "clips": 0,
+          "bytes": 62604,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/silk-drapery.glb",
+          "triangles": 768,
+          "clips": 0,
+          "bytes": 20760,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/scene-hospitality.glb",
+          "triangles": 14048,
+          "clips": 0,
+          "bytes": 338068,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/floral-centerpiece.glb",
+          "triangles": 9800,
+          "clips": 0,
+          "bytes": 244216,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/marigold-garland.glb",
+          "triangles": 16144,
+          "clips": 0,
+          "bytes": 402860,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/candle-single.glb",
+          "triangles": 272,
+          "clips": 0,
+          "bytes": 9180,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/fluted-vase.glb",
+          "triangles": 440,
+          "clips": 0,
+          "bytes": 12292,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/mandap-pavilion.glb",
+          "triangles": 12372,
+          "clips": 0,
+          "bytes": 297676,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/pearl-blossom.glb",
+          "triangles": 1040,
+          "clips": 0,
+          "bytes": 27532,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/celebration-crown.glb",
+          "triangles": 1032,
+          "clips": 0,
+          "bytes": 28956,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/gold-sparkle.glb",
+          "triangles": 16,
+          "clips": 0,
+          "bytes": 1596,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/podium-trio.glb",
+          "triangles": 576,
+          "clips": 0,
+          "bytes": 12564,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/scene-wedding-portal.glb",
+          "triangles": 56688,
+          "clips": 0,
+          "bytes": 1390192,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/cocktail-table.glb",
+          "triangles": 672,
+          "clips": 0,
+          "bytes": 18644,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/crystal-chandelier.glb",
+          "triangles": 5752,
+          "clips": 0,
+          "bytes": 136228,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/portal-arch.glb",
+          "triangles": 420,
+          "clips": 0,
+          "bytes": 12460,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/festive-umbrella.glb",
+          "triangles": 2296,
+          "clips": 0,
+          "bytes": 62824,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/ribbon-loop.glb",
+          "triangles": 110,
+          "clips": 0,
+          "bytes": 5240,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/floral-arch.glb",
+          "triangles": 28072,
+          "clips": 0,
+          "bytes": 699184,
+          "status": "structurally checked"
+        },
+        {
+          "file": "public/assets/exotic/models/mobile/gold-blossom.glb",
+          "triangles": 1040,
+          "clips": 0,
+          "bytes": 27724,
+          "status": "structurally checked"
+        }
+      ],
+      "method": "Custom GLB header, chunk alignment, embedded buffers, accessor/index bounds, finite positions, unit normals, material ranges and animation channel/timestamp checks; not Khronos validator certification."
+    },
+    "svg": {
+      "count": 150,
+      "xml_parse": "pass",
+      "scripts": "none"
+    },
+    "lottie": {
+      "count": 14,
+      "json_and_expected_structure": "checked",
+      "external_assets": "none",
+      "production_lottie_player_tested": false
+    },
+    "images": {
+      "decode_checked": 157,
+      "transparent_model_renders_and_overlays": 45
+    },
+    "catalogue_links": "All listed local asset files exist",
+    "browser": {
+      "catalogue_desktop": {
+        "recommended_cards": 16,
+        "horizontal_overflow": false
+      },
+      "filter_search_models": 3,
+      "selection_button": "pass",
+      "svg_preview_play_pause": "pass",
+      "catalogue_mobile": {
+        "horizontal_overflow": false
+      },
+      "svg_orbit_motion_changes_pixels": true,
+      "standalone_svg_img_reduced_motion_observation": false,
+      "catalogue_reduced_motion_uses_poster": true,
+      "webgl_context_available": false,
+      "actual_glb_browser_geometry_loads": {
+        "count": 0,
+        "status": "Not tested: this browser did not provide a WebGL 2 context. The unavailable-WebGL message was tested instead.",
+        "results": []
+      },
+      "webgl_unavailable_message": "WebGL 2 is unavailable. Open a PNG in model-renders instead.",
+      "page_errors": [],
+      "scope": "In-memory DOM with embedded local image bytes. Browser URL navigation was blocked by the environment; no security policy was changed. The real localhost/file navigation path has not been browser-tested here."
+    },
+    "rendering": {
+      "model_designs_rendered": 35,
+      "renderer": "VTK offscreen",
+      "output": "Transparent RGBA PNGs; model geometry and its declared materials used."
+    }
+  },
+  "warnings": [
+    "Not a finished application: production Next.js/R3F/Motion integration has not been built or tested.",
+    "Lottie JSON was structurally checked; playback in the actual production Lottie runtime remains untested. Animated-SVG alternatives are separately previewable.",
+    "Logo SVGs are approximate traces of a low-resolution screenshot, not an official master vector.",
+    "The 3D assets are newly built stylized originals, not recovered authoring files behind the earlier image collage.",
+    "The custom GLB inspector did not receive a WebGL 2 context in the available browser. Its fallback message was tested; real-time rendering remains to be tested on the destination machine.",
+    "A standalone animated SVG in an image context did not reliably inherit reduced-motion changes in this browser. The catalogue explicitly switches to static posters; use the same parent-controlled fallback in production."
+  ],
+  "failures": []
+}

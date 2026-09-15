@@ -1,0 +1,114 @@
+[
+  {
+    "id": "exotic-emblem-orbit",
+    "title": "Exotic / Emblem orbit",
+    "path": "public/assets/exotic/lottie/exotic-emblem-orbit.json",
+    "durationSeconds": 4.0,
+    "loopRecommended": true,
+    "posterFrame": 90
+  },
+  {
+    "id": "exotic-emblem-reveal",
+    "title": "Exotic / Emblem reveal",
+    "path": "public/assets/exotic/lottie/exotic-emblem-reveal.json",
+    "durationSeconds": 4.0,
+    "loopRecommended": false,
+    "posterFrame": 90
+  },
+  {
+    "id": "petal-bloom",
+    "title": "Exotic / Petal bloom",
+    "path": "public/assets/exotic/lottie/petal-bloom.json",
+    "durationSeconds": 4.0,
+    "loopRecommended": true,
+    "posterFrame": 90
+  },
+  {
+    "id": "gold-orbit",
+    "title": "Exotic / Gold orbit",
+    "path": "public/assets/exotic/lottie/gold-orbit.json",
+    "durationSeconds": 4.0,
+    "loopRecommended": true,
+    "posterFrame": 90
+  },
+  {
+    "id": "invitation-open",
+    "title": "Exotic / Invitation opens",
+    "path": "public/assets/exotic/lottie/invitation-open.json",
+    "durationSeconds": 4.0,
+    "loopRecommended": true,
+    "posterFrame": 90
+  },
+  {
+    "id": "curtain-reveal",
+    "title": "Exotic / Curtains opening",
+    "path": "public/assets/exotic/lottie/curtain-reveal.json",
+    "durationSeconds": 4.0,
+    "loopRecommended": false,
+    "posterFrame": 90
+  },
+  {
+    "id": "navratri-rhythm",
+    "title": "Exotic / Navratri rhythm",
+    "path": "public/assets/exotic/lottie/navratri-rhythm.json",
+    "durationSeconds": 4.0,
+    "loopRecommended": true,
+    "posterFrame": 90
+  },
+  {
+    "id": "chandelier-glow",
+    "title": "Exotic / Chandelier glow",
+    "path": "public/assets/exotic/lottie/chandelier-glow.json",
+    "durationSeconds": 4.0,
+    "loopRecommended": true,
+    "posterFrame": 90
+  },
+  {
+    "id": "journey-draw",
+    "title": "Exotic / Planning journey",
+    "path": "public/assets/exotic/lottie/journey-draw.json",
+    "durationSeconds": 4.0,
+    "loopRecommended": false,
+    "posterFrame": 90
+  },
+  {
+    "id": "gold-ribbon-flow",
+    "title": "Exotic / Ribbon flow",
+    "path": "public/assets/exotic/lottie/gold-ribbon-flow.json",
+    "durationSeconds": 4.0,
+    "loopRecommended": true,
+    "posterFrame": 90
+  },
+  {
+    "id": "booking-success",
+    "title": "Exotic / Booking confirmation",
+    "path": "public/assets/exotic/lottie/booking-success.json",
+    "durationSeconds": 4.0,
+    "loopRecommended": false,
+    "posterFrame": 90
+  },
+  {
+    "id": "loading-dots",
+    "title": "Exotic / Loading dots",
+    "path": "public/assets/exotic/lottie/loading-dots.json",
+    "durationSeconds": 4.0,
+    "loopRecommended": true,
+    "posterFrame": 90
+  },
+  {
+    "id": "scroll-cue",
+    "title": "Exotic / Scroll cue",
+    "path": "public/assets/exotic/lottie/scroll-cue.json",
+    "durationSeconds": 4.0,
+    "loopRecommended": true,
+    "posterFrame": 90
+  },
+  {
+    "id": "sparkle-field",
+    "title": "Exotic / Sparkles",
+    "path": "public/assets/exotic/lottie/sparkle-field.json",
+    "durationSeconds": 4.0,
+    "loopRecommended": true,
+    "posterFrame": 90
+  }
+]
