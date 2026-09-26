@@ -115,7 +115,7 @@ export function GalleryManager({
           className="work-search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Find a photo, keyword, or event…"
+          aria-label="Search gallery photos" placeholder="Find a photo, keyword, or event…"
         />
         <select
           value={category}
