@@ -48,7 +48,7 @@ const labels: Record<string, string> = {
   slug: "Service page address",
   serviceSlug: "Linked service page address (e.g. wedding-planning)",
   showMap: "Show location map",
-  brand: "Business details",
+  brand: "Website identity",
   hero: "Hero slideshow",
   services: "Services carousel",
   gallery: "Photo gallery",
@@ -455,7 +455,16 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
       );
     return (
       <div className="admin-fields" key={id}>
-        {Object.entries(value).map(([k, v]) => field(v, [...path, k], k))}
+        {Object.entries(value)
+          .filter(
+            ([k]) =>
+              !(
+                path.length === 1 &&
+                path[0] === "brand" &&
+                ["phone", "email", "whatsapp"].includes(k)
+              ),
+          )
+          .map(([k, v]) => field(v, [...path, k], k))}
       </div>
     );
   }
@@ -730,6 +739,15 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
             </>
           ) : content ? (
             <>
+              {section === "brand" && (
+                <p className="admin-help">
+                  Your phone, email and WhatsApp are managed in{" "}
+                  <button onClick={() => chooseSection("businessSettings")}>
+                    Business &amp; messages ↗
+                  </button>{" "}
+                  and update across the website.
+                </p>
+              )}
               <p className="admin-help">
                 Edit the fields below. Save a draft to preview your changes,
                 then publish when ready.

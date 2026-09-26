@@ -1,5 +1,5 @@
 import { ImmersiveHome } from "@/components/home/ImmersiveHome";
-import { getDocument } from "@/lib/cms/storage";
+import { getPublicDocument as getDocument } from "@/lib/business/public-content";
 import { isAdmin } from "@/lib/cms/auth";
 import "./immersive.css";
 import "./portfolio.css";

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { getDocument } from "@/lib/cms/storage";
+import { getPublicDocument as getDocument } from "@/lib/business/public-content";
 import {
   PortfolioHeader,
   PortfolioFooter,

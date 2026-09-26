@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getWorkspace } from "@/lib/business/store";
 import { EstimateCalculator } from "@/components/portfolio/EstimateCalculator";
 import { notFound } from "next/navigation";
-import { getDocument } from "@/lib/cms/storage";
+import { getPublicDocument as getDocument } from "@/lib/business/public-content";
 import {
   PortfolioHeader,
   PortfolioFooter,
