@@ -1,14 +1,13 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import type { GalleryItem, SiteContent } from "@/lib/cms/schema";
 import { filterGallery, relatedGallery } from "@/lib/gallery";
 import { EnquiryDialog } from "@/components/forms/EnquiryDialog";
 export function GalleryBrowser({ content: c }: { content: SiteContent }) {
-  const router = useRouter(),
-    query = useSearchParams();
+  const query = useSearchParams();
   const [saved, setSaved] = useState<string[]>([]),
     [status, setStatus] = useState(""),
     [limit, setLimit] = useState(24);
@@ -89,8 +88,15 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
       setStatus("Copy this link: " + new URL(url, window.location.origin).href);
     }
   }
+  function navigate(e: MouseEvent<HTMLAnchorElement>) {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)
+      return;
+    e.preventDefault();
+    if (searchTimer.current) clearTimeout(searchTimer.current);
+    window.history.pushState(null, "", e.currentTarget.href);
+  }
   function close() {
-    router.replace(href({ photo: null }), { scroll: false });
+    window.history.replaceState(null, "", href({ photo: null }));
   }
   const shortlist = items.filter((i) => saved.includes(i.id));
   const enquiryMessage = shortlist.length
@@ -104,6 +110,8 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
     return (
       <article className="p-pin" key={item.id}>
         <Link
+          prefetch={false}
+          onClick={navigate}
           href={href({ photo: item.id })}
           scroll={false}
           className="p-pin-image"
@@ -126,7 +134,12 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
             {item.category}
             <span>{item.completed ? "Our work" : "Inspiration"}</span>
           </p>
-          <Link href={href({ photo: item.id })} scroll={false}>
+          <Link
+            prefetch={false}
+            onClick={navigate}
+            href={href({ photo: item.id })}
+            scroll={false}
+          >
             <h2>{item.title}</h2>
           </Link>
           {item.location && <small>{item.location}</small>}
@@ -150,9 +163,11 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
                 if (searchTimer.current) clearTimeout(searchTimer.current);
                 searchTimer.current = setTimeout(
                   () =>
-                    router.replace(href({ q: value || null, photo: null }), {
-                      scroll: false,
-                    }),
+                    window.history.replaceState(
+                      null,
+                      "",
+                      href({ q: value || null, photo: null }),
+                    ),
                   450,
                 );
               }}
@@ -179,6 +194,8 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
         </div>
         <div className="p-category-tabs">
           <Link
+            prefetch={false}
+            onClick={navigate}
             scroll={false}
             href={href({ category: null, photo: null })}
             className={!category ? "active" : ""}
@@ -187,6 +204,8 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
           </Link>
           {[...new Set(items.map((i) => i.category))].map((cat) => (
             <Link
+              prefetch={false}
+              onClick={navigate}
               scroll={false}
               key={cat}
               href={href({ category: cat, photo: null })}
@@ -199,6 +218,8 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
         <div className="p-filter-row">
           <div>
             <Link
+              prefetch={false}
+              onClick={navigate}
               scroll={false}
               className={query.get("featured") === "1" ? "active" : ""}
               href={href({
@@ -209,6 +230,8 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
               ✦ Featured
             </Link>
             <Link
+              prefetch={false}
+              onClick={navigate}
               scroll={false}
               className={query.get("collection") === "work" ? "active" : ""}
               href={href({
@@ -219,6 +242,8 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
               Our completed work
             </Link>
             <Link
+              prefetch={false}
+              onClick={navigate}
               scroll={false}
               className={savedView ? "active" : ""}
               href={href({
@@ -275,7 +300,12 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
                 ? "We are curating our completed-event portfolio. Contact our team to see recent projects, or explore the inspiration collection."
                 : "Try a broader keyword or another occasion."}
           </p>
-          <Link href="/gallery" className="x-button x-button-outline">
+          <Link
+            prefetch={false}
+            onClick={navigate}
+            href="/gallery"
+            className="x-button x-button-outline"
+          >
             Explore all photos ↗
           </Link>
         </div>
@@ -373,6 +403,8 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
                     .filter(Boolean)
                     .map((tag) => (
                       <Link
+                        prefetch={false}
+                        onClick={navigate}
                         key={tag}
                         href={href({ q: tag, category: null, photo: null })}
                         scroll={false}
@@ -420,6 +452,8 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
               <div>
                 {relatedGallery(items, selected).map((item) => (
                   <Link
+                    prefetch={false}
+                    onClick={navigate}
                     key={item.id}
                     href={href({ photo: item.id })}
                     scroll={false}
