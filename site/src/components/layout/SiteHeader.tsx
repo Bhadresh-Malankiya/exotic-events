@@ -20,7 +20,7 @@ export function SiteHeader() {
     if (!open && dialog.open) dialog.close();
   }, [open]);
 
-  if (pathname === "/" || pathname.startsWith("/admin") || pathname.startsWith("/gallery") || pathname.startsWith("/services") || pathname === "/planning") return null;
+  if (pathname === "/" || (pathname.startsWith("/admin") || pathname.startsWith("/documents")) || pathname.startsWith("/gallery") || pathname.startsWith("/services") || pathname === "/planning") return null;
 
   return (
     <header className="sticky top-0 z-50 border-b border-surface-line/60 bg-ink/85 backdrop-blur-md">

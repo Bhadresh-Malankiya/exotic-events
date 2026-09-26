@@ -1,6 +1,8 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import { BusinessWorkspace } from "@/components/admin/BusinessWorkspace";
+import { GalleryManager } from "@/components/admin/GalleryManager";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import type { CmsDocument, SiteContent } from "@/lib/cms/schema";
 import { defaultContent } from "@/lib/cms/defaults";
@@ -18,7 +20,23 @@ type Enquiry = {
   guestCount: string;
   message: string;
 };
+const businessViews = [
+  "dashboard",
+  "enquiries",
+  "quotations",
+  "invoices",
+  "catalog",
+  "estimates",
+  "businessSettings",
+];
 const labels: Record<string, string> = {
+  dashboard: "Overview",
+  quotations: "Quotations",
+  invoices: "Invoices & payments",
+  catalog: "Items & pricing",
+  estimates: "Service estimates",
+  businessSettings: "Business & messages",
+  enquiries: "Enquiries",
   servicePages: "Service pages",
   planning: "Planning & budget",
   nextSteps: "What happens next",
@@ -86,7 +104,8 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
     [password, setPassword] = useState(""),
     [busy, setBusy] = useState(false),
     [status, setStatus] = useState(""),
-    [section, setSection] = useState("hero"),
+    [section, setSection] = useState("dashboard"),
+    [mobileMenu, setMobileMenu] = useState(false),
     [content, setContent] = useState<SiteContent | null>(null),
     [etag, setEtag] = useState(""),
     [dirty, setDirty] = useState(false),
@@ -198,6 +217,7 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
   }
   async function chooseSection(next: string) {
     setSection(next);
+    setMobileMenu(false);
     setStatus("");
     try {
       if (next === "enquiries") setEnquiries(await api("/api/admin/enquiries"));
@@ -283,11 +303,6 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
           {name === "image" || name === "logo" || name === "ribbon" ? (
             <>
               <img src={value} alt="Current image" />
-              <input
-                id={id}
-                value={value}
-                onChange={(e) => update(path, e.target.value)}
-              />
               <div className="admin-image-actions">
                 <label className="admin-small-button">
                   Upload image
@@ -364,6 +379,15 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
                 <span className="admin-index">
                   {String(index + 1).padStart(2, "0")}
                 </span>
+                {typeof item === "object" &&
+                  !Array.isArray(item) &&
+                  typeof item.image === "string" && (
+                    <img
+                      className="admin-summary-thumb"
+                      src={item.image}
+                      alt=""
+                    />
+                  )}
                 {typeof item === "object" && !Array.isArray(item)
                   ? String(
                       item.title || item.question || item.label || "Untitled",
@@ -477,35 +501,61 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
     );
   return (
     <div className="admin-shell" data-lenis-prevent>
-      <aside className="admin-sidebar">
+      <div className="admin-mobile-bar">
+        <strong>
+          EXOTIC <small>Business workspace</small>
+        </strong>
+        <button
+          aria-expanded={mobileMenu}
+          aria-controls="admin-navigation"
+          onClick={() => setMobileMenu(!mobileMenu)}
+        >
+          {mobileMenu ? "Close ×" : "Menu ☰"}
+        </button>
+      </div>
+      <aside
+        id="admin-navigation"
+        className={`admin-sidebar ${mobileMenu ? "is-open" : ""}`}
+      >
         <Link href="/" className="admin-brand">
-          EXOTIC<span>CONTENT STUDIO</span>
+          EXOTIC<span>BUSINESS WORKSPACE</span>
         </Link>
-        <p className="admin-nav-label">Website content</p>
+        <p className="admin-nav-label">Your business</p>
         <nav>
-          {Object.keys(defaultContent).map((key) => (
+          {businessViews.map((key, i) => (
             <button
               key={key}
               className={section === key ? "active" : ""}
               onClick={() => chooseSection(key)}
             >
+              <span className="admin-nav-icon">
+                {["◫", "✉", "▤", "▧", "▦", "⌗", "⚙"][i]}
+              </span>
               {label(key)}
             </button>
           ))}
         </nav>
-        <p className="admin-nav-label">Manage</p>
+        <details className="admin-nav-group" open>
+          <summary>Website & portfolio</summary>
+          <nav>
+            {Object.keys(defaultContent).map((key) => (
+              <button
+                key={key}
+                className={section === key ? "active" : ""}
+                onClick={() => chooseSection(key)}
+              >
+                {label(key)}
+              </button>
+            ))}
+          </nav>
+        </details>
+        <p className="admin-nav-label">Library</p>
         <nav>
           <button
             className={section === "media" ? "active" : ""}
             onClick={() => chooseSection("media")}
           >
             Media library
-          </button>
-          <button
-            className={section === "enquiries" ? "active" : ""}
-            onClick={() => chooseSection("enquiries")}
-          >
-            Enquiries
           </button>
         </nav>
         <a
@@ -533,39 +583,43 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
       <div className="admin-workspace">
         <header className="admin-toolbar">
           <div>
-            <p className="admin-eyebrow">Your website, your way</p>
+            <p className="admin-eyebrow">Exotic · Your everyday workspace</p>
             <h1>{label(section)}</h1>
-            <span className="admin-save-state">
-              {dirty
-                ? "● Unsaved changes"
-                : publishedAt
-                  ? "Published " + new Date(publishedAt).toLocaleDateString()
-                  : "Ready for your first edit"}
-            </span>
+            {!businessViews.includes(section) && (
+              <span className="admin-save-state">
+                {dirty
+                  ? "● Unsaved changes"
+                  : publishedAt
+                    ? "Published " + new Date(publishedAt).toLocaleDateString()
+                    : "Ready for your first edit"}
+              </span>
+            )}
           </div>
-          <div className="admin-toolbar-actions">
-            <a
-              href={
-                section === "gallery" || section === "collection"
-                  ? "/gallery?preview=1"
-                  : "/?preview=1"
-              }
-              target="_blank"
-              rel="noreferrer"
-            >
-              Preview draft ↗
-            </a>
-            <button disabled={busy || !content} onClick={() => save("draft")}>
-              {busy ? "Working…" : "Save draft"}
-            </button>
-            <button
-              className="admin-primary"
-              disabled={busy || !content}
-              onClick={() => save("publish")}
-            >
-              Publish changes
-            </button>
-          </div>
+          {!businessViews.includes(section) && (
+            <div className="admin-toolbar-actions">
+              <a
+                href={
+                  section === "gallery" || section === "collection"
+                    ? "/gallery?preview=1"
+                    : "/?preview=1"
+                }
+                target="_blank"
+                rel="noreferrer"
+              >
+                Preview draft ↗
+              </a>
+              <button disabled={busy || !content} onClick={() => save("draft")}>
+                {busy ? "Working…" : "Save draft"}
+              </button>
+              <button
+                className="admin-primary"
+                disabled={busy || !content}
+                onClick={() => save("publish")}
+              >
+                Publish changes
+              </button>
+            </div>
+          )}
         </header>
         {status && (
           <div className="admin-status" role="status">
@@ -573,7 +627,9 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
           </div>
         )}
         <div className="admin-content">
-          {section === "enquiries" ? (
+          {businessViews.includes(section) ? (
+            <BusinessWorkspace view={section} content={content} />
+          ) : section === "enquiries" ? (
             <>
               <div className="admin-section-heading">
                 <p>
@@ -686,10 +742,29 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
                   photo’s share ID unchanged after sharing its link.
                 </p>
               )}
-              {field(
-                content[section as keyof SiteContent] as unknown as Json,
-                [section],
-                section,
+              {section === "gallery" ? (
+                <>
+                  <GalleryManager
+                    items={content.gallery.items}
+                    onChange={(items) =>
+                      update(["gallery", "items"], items as unknown as Json)
+                    }
+                  />
+                  <details className="admin-recovery">
+                    <summary>Gallery section heading & description</summary>
+                    {Object.entries(content.gallery)
+                      .filter(([key]) => key !== "items")
+                      .map(([key, value]) =>
+                        field(value as Json, ["gallery", key], key),
+                      )}
+                  </details>
+                </>
+              ) : (
+                field(
+                  content[section as keyof SiteContent] as unknown as Json,
+                  [section],
+                  section,
+                )
               )}
               <details className="admin-recovery">
                 <summary>Discard draft changes</summary>

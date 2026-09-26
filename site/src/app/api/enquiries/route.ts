@@ -1,3 +1,5 @@
+import { getWorkspace } from "@/lib/business/store";
+import { notifyEnquiry } from "@/lib/business/email";
 import { randomUUID } from "node:crypto";
 import { enquirySchema } from "@/lib/enquiry-schema";
 import { sameOrigin } from "@/lib/cms/auth";
@@ -29,13 +31,22 @@ export async function POST(request: Request) {
         { status: 429 },
       );
     const id = randomUUID();
-    await writeJson(`enquiries/${id}.json`, {
+    const record = {
       id,
       receivedAt: new Date().toISOString(),
       status: "new",
       ...parsed.data,
-    });
-    return Response.json({ ok: true, id });
+    };
+    await writeJson(`enquiries/${id}.json`, record);
+    let whatsapp = "";
+    try {
+      const { value } = await getWorkspace();
+      whatsapp = value.settings.whatsapp;
+      await notifyEnquiry(value.settings, record);
+    } catch {
+      /* The saved enquiry remains in the inbox even if notification delivery fails. */
+    }
+    return Response.json({ ok: true, id, whatsapp });
   } catch {
     return Response.json(
       {

@@ -1,7 +1,9 @@
+import { WhatsAppContact } from "@/components/layout/WhatsAppContact";
 import type { Metadata } from "next";
 import { Bodoni_Moda, Manrope } from "next/font/google";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { PageMotion } from "@/components/motion/PageMotion";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/content/site";
@@ -92,11 +94,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
         <SmoothScroll />
+        <PageMotion />
         <SiteHeader />
         <main id="main-content" className="flex-1">
           {children}
         </main>
         <SiteFooter />
+        <WhatsAppContact />
       </body>
     </html>
   );

@@ -10,7 +10,7 @@ const year = new Date().getFullYear();
 
 export function SiteFooter() {
   const pathname = usePathname();
-  if (pathname === "/" || pathname.startsWith("/admin") || pathname.startsWith("/gallery") || pathname.startsWith("/services") || pathname === "/planning") return null;
+  if (pathname === "/" || (pathname.startsWith("/admin") || pathname.startsWith("/documents")) || pathname.startsWith("/gallery") || pathname.startsWith("/services") || pathname === "/planning") return null;
   return (
     <footer className="border-t border-surface-line bg-ink-soft">
       <div className="content-shell pt-16 pb-10">

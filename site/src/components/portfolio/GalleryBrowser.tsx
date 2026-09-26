@@ -341,6 +341,21 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
                 </p>
                 <h2>{selected.title}</h2>
                 <p>{selected.description}</p>
+                {selected.credit && (
+                  <p className="p-photo-meta">
+                    Photo: {selected.credit} · {selected.license}. Resized for
+                    display.{" "}
+                    {selected.source && (
+                      <a
+                        href={selected.source}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Original &amp; licence ↗
+                      </a>
+                    )}
+                  </p>
+                )}
                 {selected.event && (
                   <p className="p-photo-meta">{selected.event}</p>
                 )}

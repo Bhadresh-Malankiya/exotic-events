@@ -1,6 +1,26 @@
 const photo = (s: string) => "/assets/photos/" + s + ".jpg";
 const serviceData = [
   [
+    "event-production",
+    "Stage, sound & lighting",
+    "Set the stage.\nMake it unforgettable.",
+    "A connected production plan for sound, lighting, screens and the moments that need to land perfectly.",
+    "live-stage",
+    "Celebrations",
+    "Stage layout & sightlines|Sound & lighting coordination|Screen & cue planning|Technical rehearsals & show flow",
+    "Venue size & access|Equipment & power requirements|Show duration & crew|Transport, setup & rehearsal time",
+  ],
+  [
+    "brand-launches",
+    "Brand launches & activations",
+    "Bring your brand\ninto the room.",
+    "Product reveals, launches and guest experiences shaped around your brand, audience and purpose.",
+    "conference-stage",
+    "Corporate",
+    "Launch format & guest journey|Branded stage & installations|Presentation & reveal planning|Guest registration & coordination",
+    "Audience & venue|Custom branding & fabrication|Technical production|Activation days & staffing",
+  ],
+  [
     "wedding-planning",
     "Weddings",
     "A celebration.\nEntirely your own.",
@@ -85,28 +105,24 @@ export const servicePagesPreset = {
       image: photo(img),
       alt: title + " event setting",
       category,
-      scope: scope
-        .split("|")
-        .map((title, i) => ({
-          title,
-          description: [
-            "We agree the priorities with you before planning the details.",
-            "A cohesive direction, refined around your venue and preferences.",
-            "Thoughtful coordination to keep the experience connected.",
-            "A clear plan for the team, timings, and finishing touches.",
-          ][i],
-        })),
-      budgetFactors: budget
-        .split("|")
-        .map((title, i) => ({
-          title,
-          description: [
-            "The starting point for your scope and quotation.",
-            "Availability, scale, and the choices you make affect this part.",
-            "We compare options so you can see where the investment goes.",
-            "Confirmed in the written proposal before you commit.",
-          ][i],
-        })),
+      scope: scope.split("|").map((title, i) => ({
+        title,
+        description: [
+          "We agree the priorities with you before planning the details.",
+          "A cohesive direction, refined around your venue and preferences.",
+          "Thoughtful coordination to keep the experience connected.",
+          "A clear plan for the team, timings, and finishing touches.",
+        ][i],
+      })),
+      budgetFactors: budget.split("|").map((title, i) => ({
+        title,
+        description: [
+          "The starting point for your scope and quotation.",
+          "Availability, scale, and the choices you make affect this part.",
+          "We compare options so you can see where the investment goes.",
+          "Confirmed in the written proposal before you commit.",
+        ][i],
+      })),
       deliverables:
         "A tailored scope, a clear quotation, and a planning timeline — discussed together before booking.",
       enabled: true,

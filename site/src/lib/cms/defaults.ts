@@ -1,3 +1,4 @@
+import galleryCollection from "../../../scripts/gallery-collection.json";
 import { contentSchema, type SiteContent } from "./schema";
 const p = (name: string) => "/assets/photos/" + name + ".jpg";
 export const defaultContent: SiteContent = contentSchema.parse({
@@ -12,7 +13,7 @@ export const defaultContent: SiteContent = contentSchema.parse({
     address: "S-41, Nilkanth Business Hub, Singanpor, Surat, Gujarat 395004",
     city: "Surat, Gujarat",
     maps: "https://maps.app.goo.gl/zBCxBvPwq22yLM7s8",
-    whatsapp: "",
+    whatsapp: "919909615585",
     instagram: "",
   },
   hero: {
@@ -119,6 +120,7 @@ export const defaultContent: SiteContent = contentSchema.parse({
     description:
       "A closer look at the atmosphere, details, and celebrations we love.",
     items: [
+      ...galleryCollection,
       {
         keywords: "gold, mandap, floral, wedding, stage, decor, chandelier",
         featured: true,

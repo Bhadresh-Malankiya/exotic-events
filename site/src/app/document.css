@@ -1,0 +1,240 @@
+.client-document {
+  background: #eff3f0;
+  color: #243c32;
+  min-height: 100vh;
+  padding: 30px 20px 70px;
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 14px;
+}
+.client-document > header {
+  max-width: 980px;
+  margin: 0 auto 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.client-document > header span {
+  font-size: 26px;
+  letter-spacing: 0.18em;
+  font-weight: 800;
+}
+.client-document > header p {
+  margin: 5px 0;
+  color: #667970;
+  font-size: 12px;
+}
+.client-document a,
+.document-response button {
+  display: inline-block;
+  border-radius: 7px;
+  background: #21573e;
+  color: #fff;
+  padding: 13px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.client-document article {
+  max-width: 980px;
+  background: #fff;
+  border: 1px solid #d8e3dc;
+  border-radius: 16px;
+  margin: auto;
+  padding: 50px;
+  box-shadow: 0 12px 50px #20493308;
+}
+.document-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: start;
+}
+.document-heading p {
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  color: #687970;
+}
+.document-heading h1 {
+  font: 400 44px var(--font-bodoni);
+  margin: 10px 0 30px;
+}
+.document-badge {
+  background: #e8f3eb;
+  color: #235a3a;
+  border-radius: 30px;
+  padding: 8px 16px;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+.document-parties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin: 15px 0 35px;
+}
+.document-parties small {
+  color: #73877b;
+  letter-spacing: 0.1em;
+}
+.document-parties h2 {
+  font: 700 18px var(--font-manrope);
+  margin: 12px 0;
+}
+.client-document p {
+  line-height: 1.7;
+  color: #5b6e62;
+}
+.document-table {
+  overflow-x: auto;
+}
+.document-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 550px;
+}
+.document-table th {
+  background: #f0f5f1;
+  color: #5f7365;
+  text-align: left;
+  padding: 14px 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.document-table td {
+  padding: 18px 10px;
+  border-bottom: 1px solid #e2e9e4;
+  vertical-align: top;
+}
+.document-table td:first-child {
+  width: 45%;
+}
+.document-table td span,
+.document-table td small {
+  display: block;
+  line-height: 1.6;
+  color: #697d70;
+}
+.document-totals {
+  margin: 28px 0 30px auto;
+  width: 300px;
+  max-width: 100%;
+}
+.document-totals > div {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+.document-totals .total {
+  border-top: 1px solid #cbdace;
+  font-size: 18px;
+  font-weight: 750;
+}
+.client-document section {
+  margin-top: 28px;
+}
+.client-document h3 {
+  font: 700 14px var(--font-manrope);
+}
+.preserve-lines {
+  white-space: pre-wrap;
+}
+.document-confirmation {
+  background: #eaf4eb;
+  border-left: 3px solid #549468;
+  padding: 16px;
+}
+.document-response {
+  padding: 25px;
+  background: #f1f6f2;
+  border: 1px solid #dae6dc;
+  border-radius: 12px;
+}
+.document-response h2 {
+  font: 700 20px var(--font-manrope);
+}
+.document-response label {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+}
+.document-response input:not([type="checkbox"]) {
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #adbfaf;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+.document-response .document-consent {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  margin: 15px 0 22px;
+  line-height: 1.6;
+}
+.document-response > div {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.document-response button:disabled {
+  opacity: 0.5;
+}
+.document-response button:last-child {
+  background: #fff;
+  color: #5c463e;
+  border: 1px solid #c6c4b9;
+}
+.document-payment {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  background: #f5f8f3;
+  padding: 24px;
+}
+.document-payment img {
+  background: white;
+}
+.client-document footer {
+  border-top: 1px solid #dde5df;
+  padding-top: 25px;
+  margin-top: 35px;
+  font-size: 12px;
+}
+.client-document footer p {
+  margin: 6px 0;
+}
+@media (max-width: 640px) {
+  .client-document {
+    padding: 18px 12px 40px;
+  }
+  .client-document article {
+    padding: 24px 18px;
+  }
+  .document-heading h1 {
+    font-size: 34px;
+  }
+  .document-heading {
+    display: block;
+  }
+  .document-badge {
+    display: inline-block;
+    margin-bottom: 15px;
+  }
+  .document-parties {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .document-payment {
+    flex-direction: column;
+    align-items: start;
+  }
+  .client-document > header a {
+    padding: 10px;
+    font-size: 11px;
+  }
+  .client-document > header p {
+    display: none;
+  }
+}

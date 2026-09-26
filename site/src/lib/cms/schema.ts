@@ -44,6 +44,9 @@ const galleryItem = item
     event: text.default(""),
     location: text.default(""),
     year: text.default(""),
+    credit: copy.default(""),
+    source: link.default(""),
+    license: text.default(""),
   })
   .transform((v) => ({ ...v, id: v.id || slugify(v.title) }));
 const servicePage = z.object({

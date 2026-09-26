@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import { getWorkspace } from "@/lib/business/store";
+import { EstimateCalculator } from "@/components/portfolio/EstimateCalculator";
 import { notFound } from "next/navigation";
 import { getDocument } from "@/lib/cms/storage";
 import {
@@ -47,6 +49,10 @@ export default async function Service({
   const c = value.published,
     s = c.servicePages.items.find((i) => i.slug === slug && i.enabled);
   if (!s) notFound();
+  const { value: workspace } = await getWorkspace();
+  const calculator = workspace.estimates.find(
+    (p) => p.serviceSlug === s.slug && p.enabled,
+  );
   const related = c.gallery.items
     .filter((i) => i.category.toLowerCase() === s.category.toLowerCase())
     .slice(0, 4);
@@ -127,6 +133,7 @@ export default async function Service({
           ))}
         </div>
       </section>
+      {calculator && <EstimateCalculator profile={calculator} />}
       {c.planning.enabled && <PlanningJourney content={c} compact />}
       {related.length > 0 && (
         <section className="p-related-section">
