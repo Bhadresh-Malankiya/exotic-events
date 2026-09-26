@@ -1,0 +1,7 @@
+.private
+.env*
+node_modules
+.next
+.git
+*.log
+public/__preview-mobile.html

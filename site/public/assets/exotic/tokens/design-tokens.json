@@ -1,0 +1,34 @@
+{
+  "colors": {
+    "background": "#0B100D",
+    "surface": "#151D17",
+    "gold": "#D6B76B",
+    "goldBright": "#EED69A",
+    "ivory": "#F1EBDD",
+    "muted": "#A3AA9F",
+    "rose": "#9B5C65",
+    "sage": "#667B5B"
+  },
+  "spacing": {
+    "desktopSection": "clamp(88px, 8vw, 144px)",
+    "mobileSection": "64px",
+    "contentMax": "1360px",
+    "pageGutter": "clamp(20px,4vw,72px)"
+  },
+  "motion": {
+    "fastMs": 180,
+    "standardMs": 320,
+    "revealMs": 700,
+    "staggerMs": 75,
+    "easing": [
+      0.22,
+      1,
+      0.36,
+      1
+    ]
+  },
+  "radii": {
+    "card": "18px",
+    "button": "999px"
+  }
+}
