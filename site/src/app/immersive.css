@@ -1782,3 +1782,6 @@
     top: -35px;
   }
 }
+
+/* Stable hero: scroll no longer remounts copy or competes with autoplay. */
+.x-hero-copy{animation:hero-copy-enter .85s cubic-bezier(.2,.7,.2,1) both}.x-hero-scene{backface-visibility:hidden;transition:opacity 1.8s ease-in-out;transform:none}.x-hero-scene img{animation:none!important}.x-hero-copy .x-actions{animation:hero-copy-enter 1.1s ease both}.x-play .line-icon{margin:0;width:17px;height:17px}.x-controls .line-icon{width:20px;height:20px}.x-dust{animation:none;pointer-events:none}@keyframes hero-copy-enter{from{opacity:0;transform:translateX(-32px)}to{opacity:1;transform:translateX(0)}}@media(prefers-reduced-motion:reduce){.x-hero-copy,.x-hero-copy .x-actions{animation:none}}

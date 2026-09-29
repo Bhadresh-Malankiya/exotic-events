@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowLabel } from "@/components/ui/LineIcon";
 import { useRef, useState } from "react";
 import { EnquiryForm } from "./EnquiryForm";
 import { Icon } from "@/components/ui/Icon";
@@ -34,7 +35,7 @@ export function EnquiryDialog({
           setOpen(true);
         }}
       >
-        {triggerLabel}
+        <ArrowLabel>{triggerLabel}</ArrowLabel>
       </button>
 
       <dialog

@@ -1,4 +1,5 @@
 "use client";
+import { LineIcon } from "@/components/ui/LineIcon";
 import { useEffect, useState, type FormEvent } from "react";
 import type { EnquiryInput } from "@/lib/enquiry-schema";
 export function EnquiryForm({
@@ -11,7 +12,8 @@ export function EnquiryForm({
   className?: string;
 }) {
   const [name, setName] = useState(""),
-    [contact, setContact] = useState(""),
+    [phone, setPhone] = useState(""),
+    [email, setEmail] = useState(""),
     [message, setMessage] = useState(initialMessage || ""),
     [busy, setBusy] = useState(false),
     [done, setDone] = useState(false),
@@ -27,12 +29,17 @@ export function EnquiryForm({
       .then(setOptions)
       .catch(() => {});
   }, []);
+  const contact = [phone, email].filter(Boolean).join(" · ");
   const text = `Hello Exotic, I'm ${name}.\nContact: ${contact}\n${message}`;
   const whatsapp = options.whatsapp
     ? `https://wa.me/${options.whatsapp}?text=${encodeURIComponent(text)}`
     : "";
   async function submit(e: FormEvent) {
     e.preventDefault();
+    if (!phone.trim() && !email.trim()) {
+      setError("Please add a phone number or email so we can reply.");
+      return;
+    }
     setBusy(true);
     setError("");
     try {
@@ -41,7 +48,8 @@ export function EnquiryForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name,
-          contact,
+          phone,
+          email,
           message,
           occasion: defaultOccasion || "Something else",
         }),
@@ -72,7 +80,7 @@ export function EnquiryForm({
               target="_blank"
               rel="noreferrer"
             >
-              Continue in WhatsApp ↗
+              Continue in WhatsApp <LineIcon name="diagonal" />
             </a>
             <small>Your message opens in WhatsApp for you to send.</small>
           </>
@@ -93,18 +101,37 @@ export function EnquiryForm({
           placeholder="How should we address you?"
         />
       </label>
-      <label>
-        Phone or email
-        <input
-          value={contact}
-          onChange={(e) => setContact(e.target.value)}
-          autoComplete="email"
-          required
-          minLength={5}
-          maxLength={200}
-          placeholder="Where can we reach you?"
-        />
-      </label>
+      <fieldset className="contact-details">
+        <legend>
+          How can we reach you? <small>Add at least one</small>
+        </legend>
+        <div>
+          <label>
+            Phone / WhatsApp
+            <input
+              type="tel"
+              autoComplete="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="Your phone number"
+              maxLength={30}
+              required={!email.trim()}
+            />
+          </label>
+          <label>
+            Email
+            <input
+              type="email"
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              maxLength={200}
+              required={!phone.trim()}
+            />
+          </label>
+        </div>
+      </fieldset>
       <label>
         What are you planning?
         <textarea
@@ -122,7 +149,13 @@ export function EnquiryForm({
         together.
       </p>
       <button type="submit" className="contact-submit" disabled={busy}>
-        {busy ? "Sending your enquiry…" : "Send My Enquiry →"}
+        {busy ? (
+          "Sending your enquiry…"
+        ) : (
+          <>
+            Send My Enquiry <LineIcon />
+          </>
+        )}
       </button>
       {error && (
         <p role="alert" className="contact-error">
@@ -132,11 +165,13 @@ export function EnquiryForm({
       <div className="contact-alternatives">
         {options.phone && (
           <a href={`tel:${options.phone.replace(/[^+\d]/g, "")}`}>
-            Prefer a call? ↗
+            Prefer a call? <LineIcon name="diagonal" />
           </a>
         )}
         {options.email && (
-          <a href={`mailto:${options.email}`}>Email our team ↗</a>
+          <a href={`mailto:${options.email}`}>
+            Email our team <LineIcon name="diagonal" />
+          </a>
         )}
         {options.whatsapp && (
           <a
@@ -144,7 +179,7 @@ export function EnquiryForm({
             target="_blank"
             rel="noreferrer"
           >
-            Chat on WhatsApp ↗
+            Chat on WhatsApp <LineIcon name="diagonal" />
           </a>
         )}
       </div>

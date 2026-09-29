@@ -1,6 +1,7 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import { LineIcon } from "@/components/ui/LineIcon";
 import { BusinessWorkspace } from "@/components/admin/BusinessWorkspace";
 import { GalleryManager } from "@/components/admin/GalleryManager";
 import { useEffect, useRef, useState, type FormEvent } from "react";
@@ -23,14 +24,14 @@ type Enquiry = {
 const businessViews = [
   "dashboard",
   "enquiries",
-  "quotations",
-  "invoices",
+  "documents",
   "catalog",
   "estimates",
   "businessSettings",
 ];
 const labels: Record<string, string> = {
   dashboard: "Overview",
+  documents: "Quotations & invoices",
   quotations: "Quotations",
   invoices: "Invoices & payments",
   catalog: "Items & pricing",
@@ -421,7 +422,7 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
                       update(path, arr);
                     }}
                   >
-                    ↓ Move down
+                    <LineIcon name="down"/> Move down
                   </button>
                   <button
                     onClick={() =>
@@ -480,7 +481,7 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
     return (
       <div className="admin-login">
         <Link href="/" className="admin-back">
-          ← Back to website
+          <LineIcon name="back"/> Back to website
         </Link>
         <form onSubmit={login}>
           <img src={defaultContent.brand.logo} alt="Exotic" />
@@ -527,7 +528,7 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
         className={`admin-sidebar ${mobileMenu ? "is-open" : ""}`}
       >
         <Link href="/" className="admin-brand">
-          EXOTIC<span>BUSINESS WORKSPACE</span>
+          <img src="/assets/exotic/logos/logo-transparent-native.png" alt="Exotic"/><span>BUSINESS WORKSPACE</span>
         </Link>
         <p className="admin-nav-label">Your business</p>
         <nav>
@@ -538,13 +539,13 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
               onClick={() => chooseSection(key)}
             >
               <span className="admin-nav-icon">
-                {["◫", "✉", "▤", "▧", "▦", "⌗", "⚙"][i]}
+                <LineIcon name={["chart", "mail", "document", "price", "wallet", "settings"][i]}/>
               </span>
               {label(key)}
             </button>
           ))}
         </nav>
-        <details className="admin-nav-group" open>
+        <details className="admin-nav-group">
           <summary>Website & portfolio</summary>
           <nav>
             {Object.keys(defaultContent).map((key) => (
@@ -573,7 +574,7 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
           rel="noreferrer"
           className="admin-live-link"
         >
-          View live website ↗
+          View live website <LineIcon name="diagonal"/>
         </a>
         <button
           className="admin-logout"
@@ -615,7 +616,7 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
                 target="_blank"
                 rel="noreferrer"
               >
-                Preview draft ↗
+                Preview draft <LineIcon name="diagonal"/>
               </a>
               <button disabled={busy || !content} onClick={() => save("draft")}>
                 {busy ? "Working…" : "Save draft"}
@@ -637,7 +638,7 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
         )}
         <div className="admin-content">
           {businessViews.includes(section) ? (
-            <BusinessWorkspace view={section} content={content} />
+            <BusinessWorkspace view={section} content={content} navigate={chooseSection} />
           ) : section === "enquiries" ? (
             <>
               <div className="admin-section-heading">
@@ -743,7 +744,7 @@ export function AdminPanel({ authenticated }: { authenticated: boolean }) {
                 <p className="admin-help">
                   Your phone, email and WhatsApp are managed in{" "}
                   <button onClick={() => chooseSection("businessSettings")}>
-                    Business &amp; messages ↗
+                    Business &amp; messages <LineIcon name="diagonal"/>
                   </button>{" "}
                   and update across the website.
                 </p>

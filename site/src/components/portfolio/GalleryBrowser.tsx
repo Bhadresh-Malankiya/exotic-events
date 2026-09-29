@@ -1,4 +1,6 @@
 "use client";
+import { ResponsivePhoto } from "@/components/ui/ResponsivePhoto";
+import { LineIcon } from "@/components/ui/LineIcon";
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -117,8 +119,8 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
           className="p-pin-image"
           style={{ aspectRatio: [0.76, 1.08, 0.88, 0.68, 1.18][index % 5] }}
         >
-          <img src={item.image} alt={item.alt} loading="lazy" />
-          <span className="p-pin-open">Explore ↗</span>
+          <ResponsivePhoto src={item.image} alt={item.alt} loading="lazy" />
+          <span className="p-pin-open">Explore <LineIcon name="diagonal"/></span>
           {item.featured && <span className="p-featured-badge">Featured</span>}
         </Link>
         <button
@@ -189,7 +191,7 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
             }
             className="x-button x-button-outline"
           >
-            Share this collection ↗
+            Share this collection <LineIcon name="diagonal"/>
           </button>
         </div>
         <div className="p-category-tabs">
@@ -278,7 +280,7 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
                 className="x-button x-button-outline"
                 onClick={() => setLimit((v) => v + 24)}
               >
-                Explore more photos ↓
+                Explore more photos <LineIcon name="down"/>
               </button>
             </div>
           )}
@@ -306,7 +308,7 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
             href="/gallery"
             className="x-button x-button-outline"
           >
-            Explore all photos ↗
+            Explore all photos <LineIcon name="diagonal"/>
           </Link>
         </div>
       )}
@@ -330,7 +332,7 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
               share("/gallery?ids=" + encodeURIComponent(saved.join(",")))
             }
           >
-            Share shortlist ↗
+            Share shortlist <LineIcon name="diagonal"/>
           </button>
           <EnquiryDialog
             triggerLabel="Discuss These Ideas →"
@@ -381,7 +383,7 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
                         target="_blank"
                         rel="noreferrer"
                       >
-                        Original &amp; licence ↗
+                        Original &amp; licence <LineIcon name="diagonal"/>
                       </a>
                     )}
                   </p>
@@ -426,7 +428,7 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
                     className="x-button x-button-outline"
                     onClick={() => share("/gallery?photo=" + selected.id)}
                   >
-                    Share photo ↗
+                    Share photo <LineIcon name="diagonal"/>
                   </button>
                 </div>
                 <EnquiryDialog
@@ -458,7 +460,7 @@ export function GalleryBrowser({ content: c }: { content: SiteContent }) {
                     href={href({ photo: item.id })}
                     scroll={false}
                   >
-                    <img src={item.image} alt={item.alt} loading="lazy" />
+                    <ResponsivePhoto src={item.image} alt={item.alt} loading="lazy" />
                     <span>{item.title}</span>
                   </Link>
                 ))}

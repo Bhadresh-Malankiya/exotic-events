@@ -5,7 +5,7 @@ export function PageMotion() {
   const pathname = usePathname();
   useEffect(() => {
     if (
-      pathname.startsWith("/admin") ||
+      pathname.startsWith("/admin") || pathname.startsWith("/documents") ||
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     )
       return;
@@ -18,13 +18,13 @@ export function PageMotion() {
             const el = e.target as HTMLElement;
             el.animate(
               [
-                { opacity: 0, transform: "translateY(22px)" },
-                { opacity: 1, transform: "translateY(0)" },
+                { opacity: 0, transform: "translateX(-24px)" },
+                { opacity: 1, transform: "translateX(0)" },
               ],
               {
                 duration: 700,
                 easing: "cubic-bezier(.2,.7,.2,1)",
-                fill: "both",
+                fill: "none",
               },
             );
             observer.unobserve(el);

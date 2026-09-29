@@ -1,1 +1,1 @@
-export default function Loading(){return <div className="page-loading" role="status"><span className="loading-emblem">E</span><div className="loading-line"/><p>A little extraordinary is on its way.</p></div>;}
+export default function Loading(){return <div className="page-loading" role="status" aria-label="Loading page"><div className="loading-ring" aria-hidden="true"/><div className="loading-line"/><p>Loading your experience</p></div>;}

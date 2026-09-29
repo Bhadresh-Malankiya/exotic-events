@@ -1,4 +1,5 @@
 "use client";
+import { LineIcon } from "@/components/ui/LineIcon";
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { useState } from "react";
@@ -67,7 +68,7 @@ export function BusinessMap({ brand }: { brand: SiteContent["brand"] }) {
               target="_blank"
               rel="noreferrer"
             >
-              Get directions ↗
+              Get directions <LineIcon name="diagonal"/>
             </a>
           )}
           {brand.phone && (
@@ -83,7 +84,7 @@ export function BusinessMap({ brand }: { brand: SiteContent["brand"] }) {
       <iframe
         title={`${brand.name} office location`}
         src={`https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1s${query}!6i16`}
-        loading="eager"
+        loading="lazy"
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
       />

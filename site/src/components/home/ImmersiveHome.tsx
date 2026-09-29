@@ -1,6 +1,8 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
+import { ResponsivePhoto } from "@/components/ui/ResponsivePhoto";
 import Link from "next/link";
+import { LineIcon } from "@/components/ui/LineIcon";
 import { BusinessMap } from "@/components/portfolio/SiteChrome";
 import {
   FeaturedCollection,
@@ -13,13 +15,12 @@ import {
   useReducedMotion,
   useScroll,
   useTransform,
-  useMotionValueEvent,
 } from "motion/react";
 import { EnquiryDialog } from "@/components/forms/EnquiryDialog";
 import type { SiteContent } from "@/lib/cms/schema";
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
-  return <span aria-hidden="true">{diagonal ? "↗" : "→"}</span>;
+  return <LineIcon name={diagonal ? "diagonal" : "arrow"} />;
 }
 function Mark({ index = 0 }: { index?: number }) {
   const paths = [
@@ -91,7 +92,7 @@ function ScrollControls({
           })
         }
       >
-        ←
+        <LineIcon name="back" />
       </button>
       <button
         aria-label="Next photos"
@@ -102,7 +103,7 @@ function ScrollControls({
           })
         }
       >
-        →
+        <LineIcon name="arrow" />
       </button>
     </div>
   );
@@ -188,25 +189,19 @@ export function ImmersiveHome({
     offset: ["start start", "end start"],
   });
   const parallax = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const scrollScene = useRef(-1);
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    if (reduce) return;
-    const scene = Math.min(
-      c.hero.slides.length - 1,
-      Math.floor(v * c.hero.slides.length * 1.5),
-    );
-    if (v > 0.06 && v < 0.65 && scene !== scrollScene.current) {
-      scrollScene.current = scene;
-      setSlide(scene);
-    }
-  });
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
   useEffect(() => {
-    if (paused || reduce || !c.hero.autoplay || c.hero.slides.length < 2)
+    if (
+      paused ||
+      scrolled ||
+      reduce ||
+      !c.hero.autoplay ||
+      c.hero.slides.length < 2
+    )
       return;
     const id = setInterval(
       () => setSlide((i) => (i + 1) % c.hero.slides.length),
@@ -215,6 +210,7 @@ export function ImmersiveHome({
     return () => clearInterval(id);
   }, [
     paused,
+    scrolled,
     reduce,
     c.hero.autoplay,
     c.hero.intervalSeconds,
@@ -226,7 +222,7 @@ export function ImmersiveHome({
   }, [lightbox]);
   const filtered = c.gallery.items.filter(
     (x) => category === "All" || x.category === category,
-  );
+  ).slice(0, 12);
   const hero = c.hero.slides[slide % c.hero.slides.length];
   const selectSlide = (i: number) => {
     setSlide(i);
@@ -237,7 +233,9 @@ export function ImmersiveHome({
       {preview && (
         <div className="x-preview-banner">
           Draft preview · changes are not public{" "}
-          <a href="/admin">Return to editor ↗</a>
+          <a href="/admin">
+            Return to editor <LineIcon name="diagonal" />
+          </a>
         </div>
       )}
       <header className={`x-header ${scrolled ? "is-scrolled" : ""}`}>
@@ -305,10 +303,12 @@ export function ImmersiveHome({
                 className={`x-hero-scene ${slide === i ? "is-active" : ""}`}
                 key={s.image + i}
               >
-                <img
+                <ResponsivePhoto
+                  sizes="100vw"
                   src={s.image}
                   alt={s.alt}
-                  loading={i === 0 ? "eager" : "lazy"}
+                  loading="eager"
+                  decoding="async"
                   fetchPriority={i === 0 ? "high" : "auto"}
                 />
               </div>
@@ -316,7 +316,7 @@ export function ImmersiveHome({
           </motion.div>
           <div className="x-hero-shade" />
           <div className="x-dust" aria-hidden="true" />
-          <div className="x-hero-copy" key={slide}>
+          <div className="x-hero-copy">
             <p className="x-kicker">{hero.eyebrow}</p>
             <h1>
               {hero.title}
@@ -331,7 +331,9 @@ export function ImmersiveHome({
               />
               <a className="x-button x-button-glass" href="#experiences">
                 {hero.cta}
-                <span className="x-play">↗</span>
+                <span className="x-play">
+                  <LineIcon name="diagonal" />
+                </span>
               </a>
             </div>
             <div className="x-hero-promises">
@@ -361,7 +363,10 @@ export function ImmersiveHome({
           </div>
           <div className="x-hero-bottom">
             <a href="#experiences" className="x-scroll">
-              <span>↓</span>Scroll to discover
+              <span>
+                <LineIcon name="down" />
+              </span>
+              Scroll to discover
             </a>
             <div className="x-slide-control">
               <span className="x-scene-label">{hero.label}</span>
@@ -427,14 +432,20 @@ export function ImmersiveHome({
                 }}
                 key={i}
               >
-                <img src={item.image} alt={item.alt} loading="lazy" />
+                <ResponsivePhoto
+                  src={item.image}
+                  alt={item.alt}
+                  loading="lazy"
+                />
                 <span className="x-card-shade" />
                 <span className="x-service-number">{item.category}</span>
                 <span className="x-service-copy">
                   <Mark index={i} />
                   <h3>{item.title}</h3>
                   <span className="x-hover-copy">{item.description}</span>
-                  <span className="x-card-arrow">↗</span>
+                  <span className="x-card-arrow">
+                    <LineIcon name="diagonal" />
+                  </span>
                 </span>
               </Link>
             ))}
@@ -474,7 +485,11 @@ export function ImmersiveHome({
                 key={item.image + i}
                 onClick={() => setLightbox(c.gallery.items.indexOf(item))}
               >
-                <img src={item.image} alt={item.alt} loading="lazy" />
+                <ResponsivePhoto
+                  src={item.image}
+                  alt={item.alt}
+                  loading="lazy"
+                />
                 <span className="x-card-shade" />
                 <span className="x-photo-label">{item.category}</span>
                 <span className="x-gallery-copy">
@@ -489,7 +504,8 @@ export function ImmersiveHome({
           </div>
           <div className="x-gallery-bottom">
             <Link className="x-text-link" href="/gallery">
-              Explore the full gallery & save your favourites ↗
+              Explore the full gallery & save your favourites{" "}
+              <LineIcon name="diagonal" />
             </Link>
             <span>
               Drag or explore <Arrow />
@@ -613,7 +629,7 @@ export function ImmersiveHome({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  WhatsApp ↗
+                  WhatsApp <LineIcon name="diagonal" />
                 </a>
               )}
             </div>
@@ -665,7 +681,7 @@ export function ImmersiveHome({
             )}
             {c.brand.instagram && (
               <a href={c.brand.instagram} target="_blank" rel="noreferrer">
-                Instagram ↗
+                Instagram <LineIcon name="diagonal" />
               </a>
             )}
           </div>
@@ -729,7 +745,7 @@ export function ImmersiveHome({
                     )
                   }
                 >
-                  ←
+                  <LineIcon name="back" />
                 </button>
                 <button
                   aria-label="Next photo"
@@ -737,7 +753,7 @@ export function ImmersiveHome({
                     setLightbox((lightbox + 1) % c.gallery.items.length)
                   }
                 >
-                  →
+                  <LineIcon name="arrow" />
                 </button>
               </div>
             </div>

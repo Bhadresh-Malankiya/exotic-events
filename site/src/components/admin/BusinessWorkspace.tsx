@@ -1,5 +1,7 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
+import { BusinessOverview } from "./BusinessOverview";
+import { LineIcon } from "@/components/ui/LineIcon";
 import { useEffect, useState } from "react";
 import {
   totals,
@@ -17,6 +19,8 @@ type Enquiry = {
   id: string;
   name: string;
   contact: string;
+  phone?: string;
+  email?: string;
   occasion: string;
   message: string;
   receivedAt: string;
@@ -61,10 +65,22 @@ const newDoc = (
 export function BusinessWorkspace({
   view,
   content,
+  navigate,
 }: {
   view: string;
+  navigate: (view: string) => void;
   content: SiteContent | null;
 }) {
+  const [docFilter, setDocFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [clientSearch, setClientSearch] = useState("");
+  const [manualLead, setManualLead] = useState(false);
+  const [lead, setLead] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
+  });
   const [data, setData] = useState<Data | null>(null),
     [ws, setWs] = useState<Workspace>(workspaceSchema.parse({})),
     [enquiries, setEnquiries] = useState<Enquiry[]>([]),
@@ -216,10 +232,11 @@ export function BusinessWorkspace({
     const d = newDoc(kind, ws.settings.terms);
     if (enquiry) {
       d.clientName = enquiry.name;
-      d.clientEmail = enquiry.contact.includes("@") ? enquiry.contact : "";
-      d.clientPhone = /^[+\d\s()-]+$/.test(enquiry.contact)
-        ? enquiry.contact
-        : "";
+      d.clientEmail =
+        enquiry.email || (enquiry.contact.includes("@") ? enquiry.contact : "");
+      d.clientPhone =
+        enquiry.phone ||
+        (/^[+\d\s()-]+$/.test(enquiry.contact) ? enquiry.contact : "");
       d.event =
         enquiry.occasion === "Something else" ? "Your event" : enquiry.occasion;
       d.notes = enquiry.message;
@@ -257,7 +274,19 @@ export function BusinessWorkspace({
   const selected = data?.documents.find((d) => d.id === active);
   const filteredDocs = (data?.documents || []).filter(
     (d) =>
-      d.kind === (view === "invoices" ? "invoice" : "quotation") &&
+      (docFilter === "all" || d.kind === docFilter) &&
+      (statusFilter === "all" ||
+        (statusFilter === "paid"
+          ? d.kind === "invoice" &&
+            d.status === "issued" &&
+            totals(d).balance === 0
+          : statusFilter === "overdue"
+            ? d.kind === "invoice" &&
+              d.status === "issued" &&
+              totals(d).balance > 0 &&
+              d.dueDate &&
+              d.dueDate < new Date().toISOString().slice(0, 10)
+            : d.status === statusFilter)) &&
       [d.number, d.clientName, d.event, d.status]
         .join(" ")
         .toLowerCase()
@@ -314,173 +343,132 @@ export function BusinessWorkspace({
         </div>
       )}
       {view === "dashboard" && (
-        <>
-          <div className="work-welcome">
-            <p>YOUR EVENT DESK</p>
-            <h2>A clear view of what’s next.</h2>
-            <span>
-              Keep every conversation, proposal, and payment in one place.
-            </span>
-            <button
-              className="work-primary"
-              onClick={() => startDocument("quotation")}
-            >
-              + Create a quotation
-            </button>
-          </div>
-          <div className="work-stats">
-            <div>
-              <span>New enquiries</span>
-              <strong>
-                {enquiries.filter((e) => e.status === "new").length}
-              </strong>
-            </div>
-            <div>
-              <span>Awaiting client approval</span>
-              <strong>
-                {
-                  data.documents.filter(
-                    (d) => d.kind === "quotation" && d.status === "shared",
-                  ).length
-                }
-              </strong>
-            </div>
-            <div>
-              <span>Approved quotations</span>
-              <strong>
-                {data.documents.filter((d) => d.status === "approved").length}
-              </strong>
-            </div>
-            <div>
-              <span>Invoice balance</span>
-              <strong>
-                {rupees(
-                  data.documents
-                    .filter(
-                      (d) => d.kind === "invoice" && d.status === "issued",
-                    )
-                    .reduce((n, d) => n + totals(d).balance, 0),
-                )}
-              </strong>
-            </div>
-          </div>
-          <div className="work-panel">
-            <h3>Your next steps</h3>
-            <ol className="work-checklist">
-              <li>
-                <span>01</span>
-                <div>
-                  <strong>Add your service items and prices</strong>
-                  <p>
-                    Create reusable items with options such as basic, premium,
-                    per guest, or per day.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <span>02</span>
-                <div>
-                  <strong>Turn an enquiry into a quotation</strong>
-                  <p>
-                    Choose the items, adjust prices, then share a private
-                    approval link.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <span>03</span>
-                <div>
-                  <strong>Invoice the approved plan</strong>
-                  <p>
-                    Generate a matching invoice, add your UPI details, and
-                    record verified payments.
-                  </p>
-                </div>
-              </li>
-            </ol>
-          </div>
-          <div className="work-panel">
-            <h3>Recent documents</h3>
-            {data.documents.slice(0, 5).map((d) => (
-              <button
-                className="work-record"
-                key={d.id}
-                onClick={() => setActive(d.id)}
-              >
-                <strong>{d.clientName}</strong>
-                <span>{d.number}</span>
-                <span className="work-badge">{d.status}</span>
-                <b>{rupees(totals(d).total)}</b>
-              </button>
-            ))}
-            {!data.documents.length && (
-              <p className="work-empty">
-                Your first quotation starts a new event story.
-              </p>
-            )}
-          </div>
-        </>
+        <BusinessOverview
+          documents={data.documents}
+          enquiries={enquiries}
+          create={startDocument}
+          navigate={navigate}
+          open={setActive}
+        />
       )}
-      {(view === "quotations" || view === "invoices") && (
+      {view === "documents" && (
         <>
           <div className="work-heading">
             <div>
-              <h2>
-                {view === "quotations" ? "Quotations" : "Invoices & payments"}
-              </h2>
-              <p>
-                {view === "quotations"
-                  ? "Prepare a proposal, share it, and track the client’s decision."
-                  : "Keep approved scopes and verified payments together."}
-              </p>
+              <h2>Quotations & invoices</h2>
+              <p>Prepare, share, approve and collect.</p>
             </div>
-            <button
-              className="work-primary"
-              onClick={() =>
-                startDocument(view === "quotations" ? "quotation" : "invoice")
-              }
-            >
-              + New {view === "quotations" ? "quotation" : "invoice"}
-            </button>
-          </div>
-          <input
-            className="work-search"
-            placeholder="Search client, event, document number, or status…"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          <div className="work-panel">
-            {filteredDocs.map((d) => (
-              <button
-                className="work-record"
-                key={d.id}
-                onClick={() => setActive(d.id)}
-              >
-                <div>
-                  <strong>{d.clientName}</strong>
-                  <small>{d.event}</small>
-                </div>
-                <span>{d.number}</span>
-                <span className="work-badge">
-                  {d.kind === "invoice" &&
-                  d.status === "issued" &&
-                  totals(d).balance === 0
-                    ? "paid"
-                    : d.status}
-                </span>
-                <b>
-                  {rupees(
-                    d.kind === "invoice" ? totals(d).balance : totals(d).total,
-                  )}
-                </b>
+            <div className="work-actions">
+              <button onClick={() => startDocument("invoice")}>
+                <LineIcon name="plus" /> Invoice
               </button>
-            ))}
+              <button
+                className="work-primary"
+                onClick={() => startDocument("quotation")}
+              >
+                <LineIcon name="plus" /> Quotation
+              </button>
+            </div>
+          </div>
+          <div className="document-filters">
+            <div className="work-tabs">
+              {[
+                ["all", "All documents"],
+                ["quotation", "Quotations"],
+                ["invoice", "Invoices"],
+              ].map(([v, l]) => (
+                <button
+                  key={v}
+                  aria-pressed={docFilter === v}
+                  onClick={() => setDocFilter(v)}
+                >
+                  {l}
+                </button>
+              ))}
+            </div>
+            <input
+              aria-label="Search documents"
+              className="work-search"
+              placeholder="Search client, event or number"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <select
+              aria-label="Filter document status"
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+            >
+              {[
+                "all",
+                "draft",
+                "shared",
+                "approved",
+                "declined",
+                "issued",
+                "paid",
+                "overdue",
+                "cancelled",
+              ].map((x) => (
+                <option key={x} value={x}>
+                  {x === "all"
+                    ? "All statuses"
+                    : x.charAt(0).toUpperCase() + x.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="document-list">
+            <div className="document-list-head">
+              <span>Client / event</span>
+              <span>Document / date</span>
+              <span>Status</span>
+              <span>Total</span>
+              <span>Balance</span>
+            </div>
+            {filteredDocs.map((d) => {
+              const t = totals(d),
+                label =
+                  d.kind === "invoice" && d.status === "issued"
+                    ? t.balance === 0
+                      ? "paid"
+                      : t.paid > 0
+                        ? "part paid"
+                        : "issued"
+                    : d.status;
+              return (
+                <button
+                  className="document-row"
+                  key={d.id}
+                  onClick={() => setActive(d.id)}
+                >
+                  <div>
+                    <strong>{d.clientName}</strong>
+                    <small>{d.event}</small>
+                  </div>
+                  <div>
+                    <strong>{d.number}</strong>
+                    <small>
+                      {new Date(d.createdAt).toLocaleDateString("en-IN")} ·{" "}
+                      {d.kind}
+                    </small>
+                  </div>
+                  <span
+                    className={`work-badge status-${label.replace(" ", "-")}`}
+                  >
+                    {label}
+                  </span>
+                  <b>{rupees(t.total)}</b>
+                  <b className="document-balance">
+                    {d.kind === "invoice" ? rupees(t.balance) : <><span className="quote-desktop">—</span><span className="quote-mobile-total">{rupees(t.total)}</span></>}
+                    <small>{d.kind === "invoice" ? "Balance due" : "Quoted total"}</small>
+                  </b>
+                </button>
+              );
+            })}
             {!filteredDocs.length && (
               <div className="work-empty">
-                <h3>Nothing here yet.</h3>
-                <p>
-                  Create a document to get started, or try a different search.
-                </p>
+                <h3>No matching documents</h3>
+                <p>Create a quotation or invoice, or adjust the filters.</p>
               </div>
             )}
           </div>
@@ -490,12 +478,18 @@ export function BusinessWorkspace({
         <>
           <div className="work-heading">
             <div>
-              <h2>Conversations worth celebrating.</h2>
+              <h2>Client enquiries</h2>
               <p>
                 Reply to a client or start a quotation with their details
                 already filled in.
               </p>
             </div>
+            <button
+              className="work-primary"
+              onClick={() => setManualLead(!manualLead)}
+            >
+              <LineIcon name="plus" /> Add enquiry
+            </button>
             <button onClick={() => load().catch((e) => setStatus(e.message))}>
               Refresh ↻
             </button>
@@ -506,6 +500,64 @@ export function BusinessWorkspace({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
+          {manualLead && (
+            <form
+              className="work-panel"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                setBusy(true);
+                try {
+                  const r = await fetch("/api/admin/enquiries", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(lead),
+                  });
+                  const result = await r.json();
+                  if (!r.ok)
+                    throw Error(result.error || "Check the contact details.");
+                  await load();
+                  setManualLead(false);
+                  setLead({ name: "", phone: "", email: "", message: "" });
+                } catch (error) {
+                  setStatus((error as Error).message);
+                } finally {
+                  setBusy(false);
+                }
+              }}
+            >
+              <h3>Add a phone, WhatsApp or walk-in enquiry</h3>
+              <div className="work-form-grid">
+                {textField(
+                  "Name",
+                  lead.name,
+                  (v) => setLead({ ...lead, name: v }),
+                  { required: true, minLength: 2 },
+                )}
+                {textField(
+                  "Phone",
+                  lead.phone,
+                  (v) => setLead({ ...lead, phone: v }),
+                  { type: "tel" },
+                )}
+                {textField(
+                  "Email",
+                  lead.email,
+                  (v) => setLead({ ...lead, email: v }),
+                  { type: "email" },
+                )}
+                {textField(
+                  "Event / notes",
+                  lead.message,
+                  (v) => setLead({ ...lead, message: v }),
+                  { required: true, minLength: 2 },
+                )}
+              </div>
+              <p className="work-help">Add at least a phone number or email.</p>
+              <button className="work-primary" disabled={busy}>
+                Save enquiry
+              </button>
+            </form>
+          )}
           <div className="work-enquiry-grid">
             {enquiries
               .filter((e) =>
@@ -517,32 +569,50 @@ export function BusinessWorkspace({
                     <h3>{e.name}</h3>
                     <span className="work-badge">{e.status}</span>
                   </div>
-                  <p>{e.contact}</p>
+                  <p>
+                    {e.phone || e.contact}
+                    {e.phone && e.email ? ` · ${e.email}` : ""}
+                  </p>
                   <small>
                     {new Date(e.receivedAt).toLocaleDateString()} · {e.occasion}
                   </small>
-                  <p className="work-message">{e.message}</p>
+                  <details className="enquiry-message">
+                    <summary>View enquiry & linked documents</summary>
+                    <p className="work-message">{e.message}</p>
+                    {data.documents
+                      .filter((d) => d.enquiryId === e.id)
+                      .map((d) => (
+                        <button
+                          key={d.id}
+                          className="desk-task"
+                          onClick={() => setActive(d.id)}
+                        >
+                          {d.number} · {d.status}
+                          <LineIcon />
+                        </button>
+                      ))}
+                  </details>
                   <div className="work-actions">
                     <button
                       className="work-primary"
                       onClick={() => startDocument("quotation", e)}
                     >
-                      Create quotation →
+                      Create quotation <LineIcon name="arrow" />
                     </button>
-                    {/^[+\d\s()-]+$/.test(e.contact) && (
+                    {(e.phone || /^[+\d\s()-]+$/.test(e.contact)) && (
                       <a
                         target="_blank"
                         rel="noreferrer"
-                        href={`https://wa.me/${e.contact.replace(/\D/g, "").replace(/^(\d{10})$/, "91$1")}?text=${encodeURIComponent(`Hello ${e.name}, thank you for your enquiry with Exotic. Let's discuss your event.`)}`}
+                        href={`https://wa.me/${(e.phone || e.contact).replace(/\D/g, "").replace(/^(\d{10})$/, "91$1")}?text=${encodeURIComponent(`Hello ${e.name}, thank you for your enquiry with Exotic. Let's discuss your event.`)}`}
                       >
-                        Reply on WhatsApp ↗
+                        Reply on WhatsApp <LineIcon name="diagonal" />
                       </a>
                     )}
-                    {e.contact.includes("@") && (
+                    {(e.email || e.contact.includes("@")) && (
                       <a
-                        href={`mailto:${encodeURIComponent(e.contact)}?cc=${encodeURIComponent(ws.settings.partnerEmails.join(","))}&subject=${encodeURIComponent("Your event enquiry · Exotic")}`}
+                        href={`mailto:${encodeURIComponent(e.email || e.contact)}?cc=${encodeURIComponent(ws.settings.partnerEmails.join(","))}&subject=${encodeURIComponent("Your event enquiry · Exotic")}`}
                       >
-                        Reply by email ↗
+                        Reply by email <LineIcon name="diagonal" />
                       </a>
                     )}
                   </div>
@@ -837,8 +907,8 @@ export function BusinessWorkspace({
                 Email partners when a new enquiry arrives
               </label>
             </section>
-            <section className="work-panel">
-              <h3>UPI payments on invoices</h3>
+            <details className="work-panel">
+              <summary>UPI & payment instructions</summary>
               {textField(
                 "UPI ID",
                 ws.settings.upiId,
@@ -889,7 +959,7 @@ export function BusinessWorkspace({
                   rows={3}
                 />
               </label>
-            </section>
+            </details>
           </div>
         </>
       )}
@@ -961,7 +1031,7 @@ export function BusinessWorkspace({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Download PDF ↓
+                  Download PDF <LineIcon name="down" />
                 </a>
                 <button
                   onClick={() => {
@@ -987,7 +1057,7 @@ export function BusinessWorkspace({
                       if (r) setActive(r.document.id);
                     }}
                   >
-                    Create invoice from approval →
+                    Create invoice from approval <LineIcon name="arrow" />
                   </button>
                 )}
                 {selected.kind === "invoice" &&
@@ -1033,7 +1103,7 @@ export function BusinessWorkspace({
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Preview client view ↗
+                      Preview client view <LineIcon name="diagonal" />
                     </a>
                     {selected.clientPhone && (
                       <a
@@ -1041,7 +1111,7 @@ export function BusinessWorkspace({
                         target="_blank"
                         rel="noreferrer"
                       >
-                        Send on WhatsApp ↗
+                        Send on WhatsApp <LineIcon name="diagonal" />
                       </a>
                     )}
                     {selected.clientEmail &&
@@ -1062,7 +1132,7 @@ export function BusinessWorkspace({
                         <a
                           href={`mailto:${encodeURIComponent(selected.clientEmail)}?cc=${encodeURIComponent(ws.settings.partnerEmails.join(","))}&subject=${encodeURIComponent(`${selected.number} · ${selected.event}`)}&body=${encodeURIComponent(`Hello ${selected.clientName},\n\nYour ${selected.kind} is ready to review:\n${location.origin}/documents/${selected.token}\n\n${ws.settings.businessName}`)}`}
                         >
-                          Open email app with CC ↗
+                          Open email app with CC <LineIcon name="diagonal" />
                         </a>
                       ))}
                   </div>
@@ -1133,12 +1203,15 @@ export function BusinessWorkspace({
                   {new Date(selected.approvedAt).toLocaleString()}
                 </div>
               )}
-              {selected.payments.map((p) => (
-                <p key={p.id}>
-                  Payment: {rupees(p.amount)} · {p.date} · {p.method} ·{" "}
-                  {p.reference}
-                </p>
-              ))}
+              <details className="payment-history">
+                <summary>Payment history ({selected.payments.length})</summary>
+                {selected.payments.map((p) => (
+                  <p key={p.id}>
+                    Payment: {rupees(p.amount)} · {p.date} · {p.method} ·{" "}
+                    {p.reference}
+                  </p>
+                ))}
+              </details>
               <details>
                 <summary>Notes & terms</summary>
                 <p className="work-message">{selected.notes}</p>
@@ -1198,6 +1271,66 @@ export function BusinessWorkspace({
               <div>
                 <details open className="work-panel">
                   <summary>1. Client & occasion</summary>
+                  <label className="work-field">
+                    Find an existing client
+                    <input
+                      list="existing-clients"
+                      placeholder="Search name, phone or email — or enter a new client below"
+                      value={clientSearch}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setClientSearch(value);
+                        const d = data.documents.find(
+                          (d) =>
+                            `${d.clientName} · ${d.clientEmail || d.clientPhone}` ===
+                            value,
+                        );
+                        if (d) {
+                          setEditing({
+                            ...editing,
+                            clientName: d.clientName,
+                            clientPhone: d.clientPhone,
+                            clientEmail: d.clientEmail,
+                            clientAddress: d.clientAddress,
+                          });
+                          setClientSearch("");
+                        } else {
+                          const en = enquiries.find(
+                            (x) => `${x.name} · ${x.contact}` === value,
+                          );
+                          if (en) {
+                            setEditing({
+                              ...editing,
+                              clientName: en.name,
+                              clientPhone:
+                                en.phone ||
+                                (/^[+\d\s()-]+$/.test(en.contact)
+                                  ? en.contact
+                                  : ""),
+                              clientEmail:
+                                en.email ||
+                                (en.contact.includes("@") ? en.contact : ""),
+                              enquiryId: en.id,
+                            });
+                            setClientSearch("");
+                          }
+                        }
+                      }}
+                    />
+                    <datalist id="existing-clients">
+                      {Array.from(
+                        new Set([
+                          ...data.documents.map(
+                            (d) =>
+                              `${d.clientName} · ${d.clientEmail || d.clientPhone}`,
+                          ),
+                          ...enquiries.map((e) => `${e.name} · ${e.contact}`),
+                        ]),
+                      ).map((v) => (
+                        <option key={v} value={v} />
+                      ))}
+                    </datalist>
+                  </label>
                   <div className="work-form-grid">
                     {textField("Client name", editing.clientName, (v) =>
                       setEditing({ ...editing, clientName: v }),
@@ -1239,33 +1372,30 @@ export function BusinessWorkspace({
                 </details>
                 <section className="work-panel">
                   <h3>2. Items & pricing</h3>
-                  <input
-                    className="work-search"
-                    placeholder="Search your saved items and choose an option…"
-                    value={itemSearch}
-                    onChange={(e) => setItemSearch(e.target.value)}
-                  />
-                  <div className="work-item-picker">
-                    {ws.catalog
-                      .filter(
-                        (c) =>
-                          c.active &&
-                          (c.name + " " + c.category)
-                            .toLowerCase()
-                            .includes(itemSearch.toLowerCase()),
-                      )
-                      .slice(0, 12)
-                      .map((c) => (
-                        <details key={c.id}>
-                          <summary>
-                            {c.name}{" "}
-                            <small>{c.variants.length} pricing options</small>
-                          </summary>
-                          {c.variants.map((v) => (
-                            <button
-                              key={v.id}
-                              onClick={() => {
-                                const line = {
+                  <label className="work-field">
+                    Add from your price book
+                    <input
+                      className="work-search"
+                      list="saved-price-options"
+                      placeholder="Search item or pricing option…"
+                      value={itemSearch}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setItemSearch(val);
+                        for (const c of ws.catalog.filter((c) => c.active)) {
+                          const v = c.variants.find(
+                            (v) =>
+                              `${c.name} / ${v.name} — ${rupees(v.price)}` ===
+                              val,
+                          );
+                          if (v) {
+                            setEditing({
+                              ...editing,
+                              lines: [
+                                ...editing.lines.filter(
+                                  (l) => l.name || l.rate,
+                                ),
+                                {
                                   id: uid(),
                                   catalogId: c.id,
                                   name: c.name,
@@ -1274,103 +1404,91 @@ export function BusinessWorkspace({
                                   quantity: 1,
                                   unit: v.unit,
                                   rate: v.price,
-                                };
-                                setEditing({
-                                  ...editing,
-                                  lines: [
-                                    ...editing.lines.filter(
-                                      (l) => l.name || l.rate,
-                                    ),
-                                    line,
-                                  ],
-                                });
-                              }}
-                            >
-                              <span>
-                                {v.name} · {rupees(v.price)}
-                                {v.maxPrice > v.price
-                                  ? "–" + rupees(v.maxPrice)
-                                  : ""}{" "}
-                                / {v.unit}
-                              </span>
-                              <b>+ Add</b>
-                            </button>
-                          ))}
-                        </details>
-                      ))}
-                  </div>
-                  {editing.lines.map((l, i) => (
-                    <div className="work-line-editor" key={l.id}>
-                      <span className="work-line-number">{i + 1}</span>
-                      <div className="work-form-grid">
-                        {textField("Item name", l.name, (v) =>
-                          setEditing({
-                            ...editing,
-                            lines: editing.lines.map((x) =>
-                              x.id === l.id ? { ...x, name: v } : x,
-                            ),
-                          }),
-                        )}
-                        {textField("Option / specification", l.variant, (v) =>
-                          setEditing({
-                            ...editing,
-                            lines: editing.lines.map((x) =>
-                              x.id === l.id ? { ...x, variant: v } : x,
-                            ),
-                          }),
-                        )}
-                        {numField("Quantity", l.quantity, (v) =>
-                          setEditing({
-                            ...editing,
-                            lines: editing.lines.map((x) =>
-                              x.id === l.id ? { ...x, quantity: v } : x,
-                            ),
-                          }),
-                        )}
-                        {numField("Agreed unit price (₹)", l.rate, (v) =>
-                          setEditing({
-                            ...editing,
-                            lines: editing.lines.map((x) =>
-                              x.id === l.id ? { ...x, rate: v } : x,
-                            ),
-                          }),
-                        )}
-                        {textField("Unit", l.unit, (v) =>
-                          setEditing({
-                            ...editing,
-                            lines: editing.lines.map((x) =>
-                              x.id === l.id ? { ...x, unit: v } : x,
-                            ),
-                          }),
-                        )}
-                        {textField(
-                          "Description (optional)",
-                          l.description,
-                          (v) =>
-                            setEditing({
-                              ...editing,
-                              lines: editing.lines.map((x) =>
-                                x.id === l.id ? { ...x, description: v } : x,
-                              ),
-                            }),
-                        )}
-                      </div>
-                      <div className="work-line-end">
-                        <strong>{rupees(l.rate * l.quantity)}</strong>
-                        <button
-                          disabled={editing.lines.length === 1}
-                          onClick={() =>
-                            setEditing({
-                              ...editing,
-                              lines: editing.lines.filter((x) => x.id !== l.id),
-                            })
+                                },
+                              ],
+                            });
+                            setItemSearch("");
+                            break;
                           }
-                        >
-                          Remove item
-                        </button>
+                        }
+                      }}
+                    />
+                    <datalist id="saved-price-options">
+                      {ws.catalog
+                        .filter((c) => c.active)
+                        .flatMap((c) =>
+                          c.variants.map((v) => (
+                            <option
+                              key={v.id}
+                              value={`${c.name} / ${v.name} — ${rupees(v.price)}`}
+                            />
+                          )),
+                        )}
+                    </datalist>
+                  </label>
+                  {editing.lines.map((l, i) => {
+                    const change = (key: string, value: string | number) =>
+                      setEditing({
+                        ...editing,
+                        lines: editing.lines.map((x) =>
+                          x.id === l.id ? { ...x, [key]: value } : x,
+                        ),
+                      });
+                    return (
+                      <div className="compact-item" key={l.id}>
+                        <div className="compact-item-main">
+                          <span>{i + 1}</span>
+                          {textField("Item", l.name, (v) => change("name", v), {
+                            placeholder: "Item name",
+                          })}
+                          {numField("Qty", l.quantity, (v) =>
+                            change("quantity", v),
+                          )}
+                          {numField("Rate ₹", l.rate, (v) => change("rate", v))}
+                          <div className="item-amount">
+                            <small>Amount</small>
+                            <strong>
+                              {rupees(
+                                Math.round(l.rate * l.quantity * 100) / 100,
+                              )}
+                            </strong>
+                          </div>
+                          <button
+                            className="item-remove"
+                            aria-label={`Remove item ${i + 1}`}
+                            disabled={editing.lines.length === 1}
+                            onClick={() =>
+                              setEditing({
+                                ...editing,
+                                lines: editing.lines.filter(
+                                  (x) => x.id !== l.id,
+                                ),
+                              })
+                            }
+                          >
+                            <LineIcon name="close" />
+                          </button>
+                        </div>
+                        <details>
+                          <summary>
+                            {l.variant ||
+                              "Add specification, unit or description"}
+                          </summary>
+                          <div className="work-form-grid">
+                            {textField("Option", l.variant, (v) =>
+                              change("variant", v),
+                            )}
+                            {textField("Unit", l.unit, (v) =>
+                              change("unit", v),
+                            )}
+                            {textField("Description", l.description, (v) =>
+                              change("description", v),
+                            )}
+                          </div>
+                        </details>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                   <button
                     className="work-secondary"
                     onClick={() =>

@@ -1,4 +1,5 @@
 "use client";
+import { LineIcon } from "@/components/ui/LineIcon";
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useRef, useState } from "react";
 import type { GalleryItem } from "@/lib/cms/schema";
@@ -159,7 +160,7 @@ export function GalleryManager({
             >
               <img src={item.image} alt={item.alt} loading="lazy" />
               {item.featured && <span>★ Featured</span>}
-              <b>Edit photo ↗</b>
+              <b>Edit photo <LineIcon name="diagonal"/></b>
             </button>
             <div>
               <strong>{item.title}</strong>
@@ -353,7 +354,7 @@ export function GalleryManager({
                 target="_blank"
                 rel="noreferrer"
               >
-                View published photo / share link ↗
+                View published photo / share link <LineIcon name="diagonal"/>
               </a>
               {status && <p className="work-inline-status">{status}</p>}
             </div>

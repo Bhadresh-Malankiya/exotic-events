@@ -1,3 +1,5 @@
+import { randomUUID } from "node:crypto";
+import { enquirySchema } from "@/lib/enquiry-schema";
 import { authorize, privateHeaders } from "@/lib/cms/auth";
 import { listAll, readJson, writeJson } from "@/lib/cms/storage";
 export async function GET(request: Request) {
@@ -35,4 +37,25 @@ export async function PATCH(request: Request) {
       { status: 409 },
     );
   }
+}
+
+export async function POST(request: Request) {
+  if (!(await authorize(request))) return new Response(null, { status: 401 });
+  const parsed = enquirySchema.safeParse(
+    await request.json().catch(() => null),
+  );
+  if (!parsed.success)
+    return Response.json(
+      { error: parsed.error.issues[0]?.message || "Check the details." },
+      { status: 400 },
+    );
+  const id = randomUUID();
+  await writeJson(`enquiries/${id}.json`, {
+    ...parsed.data,
+    id,
+    receivedAt: new Date().toISOString(),
+    status: "new",
+    source: "manual",
+  });
+  return Response.json({ ok: true, id }, { headers: privateHeaders });
 }

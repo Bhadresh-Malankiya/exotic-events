@@ -1,5 +1,8 @@
 import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
+  images: { localPatterns: [{pathname: '/assets/**', search: ''}, {pathname: '/api/media/**', search: ''}], formats: ['image/webp'], qualities: [75], minimumCacheTTL: 86400 },
+
   async redirects() {
     return [
       { source: "/events/:path*", destination: "/gallery", permanent: false },

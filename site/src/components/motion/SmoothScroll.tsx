@@ -10,14 +10,14 @@ import { usePathname } from "next/navigation";
 export function SmoothScroll() {
   const pathname = usePathname();
   useEffect(() => {
-    if (pathname.startsWith("/admin")) return;
+    if (pathname.startsWith("/admin") || pathname.startsWith("/documents") || window.matchMedia("(pointer: coarse)").matches) return;
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     );
     if (prefersReduced.matches) return;
 
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 0.85,
       anchors: { offset: -90 },
       prevent: (node) => node.closest("dialog") !== null,
       easing: (t: number) => 1 - Math.pow(1 - t, 3),

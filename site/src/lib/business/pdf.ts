@@ -62,25 +62,46 @@ export async function makePdf(doc: BusinessDocument) {
     ),
     { subset: true },
   );
-  pdf.setTitle(doc.number + " · " + doc.clientName);
+  const logo = await pdf.embedPng(
+    await sharp(
+      await readFile(
+        path.join(
+          process.cwd(),
+          "public/assets/exotic/logos/logo-transparent-native.png",
+        ),
+      ),
+    )
+      .resize({ width: 420 })
+      .png()
+      .toBuffer(),
+  );
+  const qr = await qrBytes(doc),
+    qrImage = qr ? await pdf.embedPng(qr) : null;
+  pdf.setTitle(`${doc.number} · ${doc.clientName}`);
   pdf.setAuthor(doc.business.businessName);
-  let page!: PDFPage,
-    y = 0;
-  const dark = rgb(0.12, 0.2, 0.17),
-    muted = rgb(0.4, 0.45, 0.43),
-    line = rgb(0.85, 0.88, 0.85);
-  const W = 595,
-    H = 842,
-    M = 42;
+  const W = 595.28,
+    H = 841.89,
+    M = 36,
+    R = W - M;
+  const ink = rgb(0.12, 0.12, 0.11),
+    muted = rgb(0.38, 0.37, 0.34),
+    gold = rgb(0.59, 0.43, 0.17),
+    pale = rgb(0.97, 0.95, 0.9),
+    rule = rgb(0.86, 0.83, 0.76),
+    white = rgb(1, 1, 1);
+  let page!: PDFPage;
+  let y = 0;
   const money = (n: number) =>
-    "INR " +
+    "₹ " +
     n.toLocaleString("en-IN", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
-  const text = (s: string, x: number, yy: number, size = 10, color = dark) =>
+  const text = (s: string, x: number, yy: number, size = 9, color = ink) =>
     page.drawText(s, { x, y: yy, size, font, color });
-  function lines(s: string, width: number, size: number, f: PDFFont = font) {
+  const right = (s: string, x: number, yy: number, size = 9, color = ink) =>
+    text(s, x - font.widthOfTextAtSize(s, size), yy, size, color);
+  function lines(s: string, width: number, size = 9, f: PDFFont = font) {
     const out: string[] = [];
     for (const paragraph of s.split("\n")) {
       let row = "";
@@ -108,201 +129,282 @@ export async function makePdf(doc: BusinessDocument) {
   }
   function newPage() {
     page = pdf.addPage([W, H]);
-    y = H - 48;
-    text(doc.business.businessName, M, y, 15);
-    text(doc.number, W - 210, y, 10, muted);
-    page.drawLine({
-      start: { x: M, y: y - 16 },
-      end: { x: W - M, y: y - 16 },
-      thickness: 1,
-      color: line,
+    page.drawRectangle({ x: 0, y: H - 6, width: W, height: 6, color: gold });
+    page.drawRectangle({ x: 0, y: H - 104, width: W, height: 98, color: ink });
+    const dims = logo.scaleToFit(123, 70);
+    page.drawImage(logo, {
+      x: M,
+      y: H - 89,
+      width: dims.width,
+      height: dims.height,
     });
-    y -= 48;
+    right(
+      doc.kind === "quotation" ? "QUOTATION" : "INVOICE",
+      R,
+      H - 43,
+      23,
+      white,
+    );
+    right(doc.number, R, H - 64, 10, rgb(0.9, 0.77, 0.5));
+    right(
+      doc.status === "issued" && totals(doc).balance === 0
+        ? "PAID"
+        : doc.status.toUpperCase(),
+      R,
+      H - 82,
+      8,
+      white,
+    );
+    y = H - 125;
   }
   function room(h: number) {
     if (y - h < 65) newPage();
   }
-  function para(s: string, width = W - M * 2, size = 10, color = dark, x = M) {
-    for (const l of lines(s, width, size)) {
-      room(size * 1.55);
-      text(l, x, y, size, color);
-      y -= size * 1.55;
+  function para(s: string, width = R - M, size = 8, color = muted, x = M) {
+    for (const line of lines(s, width, size)) {
+      room(size * 1.4);
+      text(line, x, y, size, color);
+      y -= size * 1.4;
     }
   }
   newPage();
-  para(doc.kind === "quotation" ? "QUOTATION" : "INVOICE", W - 2 * M, 25);
-  para(doc.status.toUpperCase(), W - 2 * M, 9, muted);
-  y -= 10;
-  para(doc.business.address, 350, 9, muted);
-  para(
-    [doc.business.phone, doc.business.email].filter(Boolean).join(" · "),
-    W - 2 * M,
-    9,
-    muted,
-  );
-  if (doc.business.taxId)
-    para("Business tax ID: " + doc.business.taxId, W - 2 * M, 9, muted);
+  const partyTop = y;
+  text("PREPARED FOR", M, y, 7, gold);
   y -= 18;
-  para("PREPARED FOR", W - 2 * M, 8, muted);
-  para(doc.clientName, W - 2 * M, 15);
+  para(doc.clientName, 245, 12, ink);
+  para([doc.clientEmail, doc.clientPhone].filter(Boolean).join(" · "), 245, 8);
+  if (doc.clientAddress) para(doc.clientAddress, 245, 8);
+  const partyBottom = y;
+  y = partyTop;
+  text("EVENT & DATES", 325, y, 7, gold);
+  y -= 18;
+  para(doc.event, R - 325, 10, ink, 325);
   para(
-    [doc.clientEmail, doc.clientPhone].filter(Boolean).join(" · "),
-    W - 2 * M,
-    10,
-  );
-  if (doc.clientAddress) para(doc.clientAddress, W - 2 * M, 10);
-  y -= 10;
-  para(doc.event, W - 2 * M, 12);
-  para(
-    `Created: ${doc.createdAt.slice(0, 10)}${doc.eventDate ? "  |  Event: " + doc.eventDate : ""}${doc.dueDate ? "  |  " + (doc.kind === "quotation" ? "Valid until: " : "Due: ") + doc.dueDate : ""}`,
-    W - 2 * M,
-    9,
+    "Issued: " + (doc.sharedAt || doc.createdAt).slice(0, 10),
+    R - 325,
+    8,
     muted,
+    325,
   );
-  y -= 20;
+  if (doc.eventDate) para("Event: " + doc.eventDate, R - 325, 8, muted, 325);
+  if (doc.dueDate)
+    para(
+      (doc.kind === "quotation" ? "Valid until: " : "Payment due: ") +
+        doc.dueDate,
+      R - 325,
+      8,
+      muted,
+      325,
+    );
+  y = Math.min(y, partyBottom) - 16;
   function tableHeader() {
-    room(45);
+    room(38);
     page.drawRectangle({
       x: M,
-      y: y - 9,
-      width: W - 2 * M,
-      height: 27,
-      color: rgb(0.94, 0.96, 0.94),
+      y: y - 8,
+      width: R - M,
+      height: 24,
+      color: ink,
     });
-    text("ITEM / OPTION", M + 8, y, 8);
-    text("QTY", 338, y, 8);
-    text("RATE", 394, y, 8);
-    text("AMOUNT", 480, y, 8);
-    y -= 30;
+    text("ITEM / DESCRIPTION", M + 8, y, 7, white);
+    right("QTY", 353, y, 7, white);
+    right("RATE", 445, y, 7, white);
+    right("AMOUNT", R - 8, y, 7, white);
+    y -= 25;
   }
   tableHeader();
-  for (const item of doc.lines) {
-    const copy = [item.name, item.variant, item.description]
-      .filter(Boolean)
-      .join(" · ");
-    const chunks = lines(copy, 272, 10);
-    if (y - (chunks.length * 15 + 18) < 65) {
+  for (let i = 0; i < doc.lines.length; i++) {
+    const item = doc.lines[i];
+    const title = lines(
+      `${String(i + 1).padStart(2, "0")}  ${item.name}`,
+      278,
+      9,
+    );
+    const detail = lines(
+      [item.variant, item.description].filter(Boolean).join(" · "),
+      266,
+      7.5,
+    ).filter(Boolean);
+    const all = [
+      ...title.map((v) => ({ v, size: 9, color: ink })),
+      ...detail.map((v) => ({ v, size: 7.5, color: muted })),
+    ];
+    const height = all.length * 12 + 12;
+    if (y - Math.min(height, 600) < 70) {
       newPage();
       tableHeader();
     }
-    text(String(item.quantity), 338, y, 9);
-    text(
-      money(item.rate),
-      468 - font.widthOfTextAtSize(money(item.rate), 8),
+    right(
+      String(item.quantity) + (item.unit ? " " + item.unit : ""),
+      353,
       y,
-      8,
+      Math.min(
+        8,
+        48 /
+          font.widthOfTextAtSize(
+            String(item.quantity) + (item.unit ? " " + item.unit : ""),
+            1,
+          ),
+      ),
     );
+    right(money(item.rate), 445, y, 8);
     const amount = money(Math.round(item.quantity * item.rate * 100) / 100);
-    const amountSize = Math.min(8, 73 / font.widthOfTextAtSize(amount, 1));
-    text(
+    right(
       amount,
-      W - M - font.widthOfTextAtSize(amount, amountSize),
+      R - 8,
       y,
-      amountSize,
+      Math.min(9, 100 / font.widthOfTextAtSize(amount, 1)),
     );
-    for (const l of chunks) {
-      room(17);
-      text(l, M + 8, y, 10);
-      y -= 15;
-    }
-    if (item.unit) {
-      room(15);
-      text(item.unit, M + 8, y, 8, muted);
-      y -= 13;
+    for (const row of all) {
+      if (y < 78) {
+        newPage();
+        tableHeader();
+      }
+      text(row.v, M + 8, y, row.size, row.color);
+      y -= row.size + 3;
     }
     page.drawLine({
-      start: { x: M, y: y - 1 },
-      end: { x: W - M, y: y - 1 },
+      start: { x: M, y: y + 4 },
+      end: { x: R, y: y + 4 },
       thickness: 0.5,
-      color: line,
+      color: rule,
     });
-    y -= 18;
+    y -= 9;
   }
   const t = totals(doc);
-  room(150);
-  y -= 10;
-  for (const [label, amount] of [
+  const sums: [string, number][] = [
     ["Subtotal", t.subtotal],
-    ["Discount", -t.discount],
-    [`Tax (${doc.taxRate}%)`, t.tax],
-    ["Total", t.total],
-    ...(doc.kind === "invoice"
-      ? [
-          ["Paid", t.paid],
-          ["Balance due", t.balance],
-        ]
+    ...(t.discount ? [["Discount", -t.discount] as [string, number]] : []),
+    ...(doc.taxRate
+      ? [[`Tax (${doc.taxRate}%)`, t.tax] as [string, number]]
       : []),
-  ] as [string, number][]) {
-    text(label, 325, y, 10);
+    ["Total", t.total],
+    ...(doc.kind === "invoice" ? [["Paid", t.paid] as [string, number]] : []),
+  ];
+  const blockHeight = Math.max(sums.length * 19 + 48, qrImage ? 134 : 75);
+  room(blockHeight + 12);
+  y -= 10;
+  const blockTop = y;
+  if (qrImage && doc.kind === "invoice" && t.balance > 0) {
+    page.drawImage(qrImage, { x: M, y: y - 99, width: 99, height: 99 });
+    text("SCAN TO PAY", M + 110, y - 12, 8, gold);
+    let payY = y - 29;
+    for (const l of lines(
+      doc.business.payeeName || doc.business.businessName,
+      145,
+      8,
+    )) {
+      text(l, M + 110, payY, 8);
+      payY -= 11;
+    }
+    for (const l of lines(doc.business.upiId || "Use your UPI app", 145, 7.5)) {
+      text(l, M + 110, payY, 7.5, muted);
+      payY -= 11;
+    }
+    text("Reference: " + doc.number, M + 110, payY - 9, 7, muted);
+  } else {
     text(
-      money(amount),
-      W - M - font.widthOfTextAtSize(money(amount), 10),
-      y,
-      10,
+      doc.kind === "quotation"
+        ? "YOUR CELEBRATION, BEAUTIFULLY PLANNED."
+        : t.balance === 0
+          ? "THANK YOU. PAYMENT RECEIVED."
+          : "THANK YOU FOR CHOOSING EXOTIC.",
+      M,
+      y - 12,
+      7,
+      gold,
     );
-    y -= 23;
+  }
+  for (const [label, value] of sums) {
+    text(label, 343, y - 8, 8, muted);
+    right(money(value), R - 8, y - 8, 9);
+    y -= 19;
+  }
+  page.drawRectangle({
+    x: 333,
+    y: y - 32,
+    width: R - 333,
+    height: 32,
+    color: pale,
+  });
+  text(
+    doc.kind === "invoice" ? "BALANCE DUE" : "QUOTATION TOTAL",
+    343,
+    y - 20,
+    7,
+    gold,
+  );
+  right(
+    money(doc.kind === "invoice" ? t.balance : t.total),
+    R - 8,
+    y - 20,
+    11,
+    ink,
+  );
+  y = Math.min(y - 45, blockTop - blockHeight);
+  if (doc.kind === "invoice" && t.balance > 0 && doc.business.paymentNote) {
+    para(doc.business.paymentNote, 290, 7.5);
+    y -= 5;
   }
   if (doc.approvedAt) {
-    y -= 8;
     para(
       `${doc.status === "declined" ? "Declined" : "Approved"} by ${doc.approvedBy} on ${doc.approvedAt.slice(0, 10)}`,
-      W - 2 * M,
-      9,
-      muted,
+      R - M,
+      8,
+      gold,
     );
+    y -= 7;
+  }
+  for (const [title, value] of [
+    ["NOTES", doc.notes],
+    ["TERMS & INCLUSIONS", doc.terms],
+  ]) {
+    if (value) {
+      room(38);
+      text(title, M, y, 7, gold);
+      y -= 13;
+      para(value, R - M, 8);
+      y -= 10;
+    }
   }
   if (doc.payments.length) {
-    y -= 15;
-    para("PAYMENT RECORD", W - 2 * M, 10);
+    room(35);
+    text("PAYMENT RECORD", M, y, 7, gold);
+    y -= 13;
     for (const p of doc.payments)
       para(
-        `${p.date} · ${p.method} · ${money(p.amount)} · ${p.reference}`,
-        W - 2 * M,
-        9,
-        muted,
+        `${p.date} · ${money(p.amount)} · ${p.method} · ${p.reference}`,
+        R - M,
+        7.5,
       );
   }
-  if (doc.notes) {
-    y -= 15;
-    room(40);
-    para("NOTES", W - 2 * M, 9);
-    para(doc.notes, W - 2 * M, 9, muted);
-  }
-  if (doc.terms) {
-    y -= 15;
-    room(40);
-    para("TERMS & INCLUSIONS", W - 2 * M, 9);
-    para(doc.terms, W - 2 * M, 9, muted);
-  }
-  if (doc.kind === "invoice" && t.balance > 0) {
-    const qr = await qrBytes(doc);
-    room(qr ? 190 : 40);
-    y -= 15;
-    if (qr) {
-      const img = await pdf.embedPng(qr);
-      page.drawImage(img, { x: M, y: y - 130, width: 130, height: 130 });
-      text("PAY BY UPI", 205, y - 8, 12);
-      text(
-        doc.business.payeeName || doc.business.businessName,
-        205,
-        y - 30,
-        10,
-      );
-      text(doc.business.upiId || "Scan using your UPI app", 205, y - 48, 9);
-      text("Amount due: " + money(t.balance), 205, y - 69, 11);
-      y -= 150;
-    }
-    para(doc.business.paymentNote, W - 2 * M, 9, muted);
-  }
+  // Long addresses remain complete in the body; a concise branded footer repeats on every page.
+  room(45);
+  para(doc.business.businessName, R - M, 8, ink);
+  para(doc.business.address, R - M, 7.5);
+  if (doc.business.taxId)
+    para("Business tax ID: " + doc.business.taxId, R - M, 7.5);
   const pages = pdf.getPages();
-  for (let i = 0; i < pages.length; i++) {
-    pages[i].drawText(`${doc.number}   |   Page ${i + 1} of ${pages.length}`, {
-      x: M,
-      y: 30,
-      size: 8,
-      font,
-      color: muted,
+  pages.forEach((p, i) => {
+    page = p;
+    page.drawLine({
+      start: { x: M, y: 49 },
+      end: { x: R, y: 49 },
+      color: gold,
+      thickness: 0.7,
     });
-  }
+    text("EXOTIC  /  EVENT & ENTERTAINMENT", M, 34, 7, gold);
+    right(`${doc.number}  ·  ${i + 1} / ${pages.length}`, R, 34, 7, muted);
+    const contact = [doc.business.phone, doc.business.email]
+      .filter(Boolean)
+      .join("  ·  ");
+    text(
+      contact,
+      M,
+      21,
+      Math.min(7, 450 / Math.max(1, font.widthOfTextAtSize(contact, 1))),
+      muted,
+    );
+  });
   return pdf.save();
 }

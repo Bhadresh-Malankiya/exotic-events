@@ -1,4 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
+import { ResponsivePhoto } from "@/components/ui/ResponsivePhoto";
+import { LineIcon } from "@/components/ui/LineIcon";
+
 import Link from "next/link";
 import { EnquiryDialog } from "@/components/forms/EnquiryDialog";
 import type { SiteContent } from "@/lib/cms/schema";
@@ -21,7 +23,7 @@ export function PlanningJourney({
           <p className="x-description">{p.description}</p>
           {compact && (
             <Link className="x-text-link" href="/planning">
-              Explore planning & budget ↗
+              Explore planning & budget <LineIcon name="diagonal"/>
             </Link>
           )}
         </div>
@@ -62,7 +64,7 @@ export function BudgetGuide({ content: c }: { content: SiteContent }) {
               <h3>{b.title}</h3>
               <p>{b.description}</p>
             </div>
-            <span>↗</span>
+            <span><LineIcon name="diagonal"/></span>
           </div>
         ))}
         <p className="p-budget-note">{p.budgetNote}</p>
@@ -97,7 +99,7 @@ export function NextSteps({ content: c }: { content: SiteContent }) {
           triggerClassName="x-button x-button-gold"
         />
         <Link href="/gallery" className="x-text-link">
-          Find a little inspiration first ↗
+          Find a little inspiration first <LineIcon name="diagonal"/>
         </Link>
       </div>
     </section>
@@ -116,21 +118,21 @@ export function FeaturedCollection({ content: c }: { content: SiteContent }) {
         <div>
           <p className="x-description">{c.collection.featuredDescription}</p>
           <Link href="/gallery?featured=1" className="x-text-link">
-            Explore featured photos ↗
+            Explore featured photos <LineIcon name="diagonal"/>
           </Link>
         </div>
       </div>
       <div className="p-featured-grid">
         {featured.slice(0, 3).map((item) => (
           <Link key={item.id} href={`/gallery?photo=${item.id}`}>
-            <img src={item.image} alt={item.alt} loading="lazy" />
+            <ResponsivePhoto src={item.image} alt={item.alt} loading="lazy" />
             <span className="p-featured-badge">✦ Featured</span>
             <div>
               <p>
                 {item.category} · {item.completed ? "Our work" : "Inspiration"}
               </p>
               <h3>{item.title}</h3>
-              <span>Explore this story ↗</span>
+              <span>Explore this story <LineIcon name="diagonal"/></span>
             </div>
           </Link>
         ))}

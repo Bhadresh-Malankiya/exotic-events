@@ -1,4 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
+import { ResponsivePhoto } from "@/components/ui/ResponsivePhoto";
+import { LineIcon } from "@/components/ui/LineIcon";
+
 import Link from "next/link";
 import { getPublicDocument as getDocument } from "@/lib/business/public-content";
 import {
@@ -37,7 +39,7 @@ export default async function Services() {
               href={`/services/${s.slug}`}
             >
               <div className="p-service-image">
-                <img src={s.image} alt={s.alt} loading="lazy" />
+                <ResponsivePhoto src={s.image} alt={s.alt} loading="lazy" />
                 <span>0{i + 1}</span>
               </div>
               <div className="p-service-text">
@@ -49,7 +51,7 @@ export default async function Services() {
                     <span key={i}>{x.title}</span>
                   ))}
                 </div>
-                <span className="x-text-link">Discover the experience ↗</span>
+                <span className="x-text-link">Discover the experience <LineIcon name="diagonal"/></span>
               </div>
             </Link>
           ))}

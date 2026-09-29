@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 /* eslint-disable @next/next/no-img-element */
 import { notFound } from "next/navigation";
 import { byToken } from "@/lib/business/store";
@@ -29,12 +30,13 @@ export default async function DocumentPage({
     <div className="client-document">
       <header>
         <div>
-          <span>EXOTIC</span>
+          <img className="document-logo" src="/assets/exotic/logos/logo-transparent-native.png" alt="Exotic Event & Entertainment" width="130" height="85"/>
           <p>{d.business.businessName}</p>
         </div>
-        <a href={`/api/documents/${token}/pdf`}>Download PDF ↓</a>
+        <a href={`/api/documents/${token}/pdf`}>Download PDF <LineIcon name="down"/></a>
       </header>
       <article>
+        <div className="document-print-brand"><img src="/assets/exotic/logos/logo-transparent-native.png" alt="Exotic" width="125" height="82"/><span>EVENT & ENTERTAINMENT</span></div>
         <div className="document-heading">
           <div>
             <p>{d.number}</p>
@@ -172,7 +174,7 @@ export default async function DocumentPage({
               <h2>{qr ? "Pay by UPI" : "Payment details"}</h2>
               <p>{d.business.payeeName}</p>
               <p>{d.business.upiId}</p>
-              {upiLink(d) && <a href={upiLink(d)}>Open UPI app ↗</a>}
+              {upiLink(d) && <a href={upiLink(d)}>Open UPI app <LineIcon name="diagonal"/></a>}
               <p>{d.business.paymentNote}</p>
             </div>
           </section>

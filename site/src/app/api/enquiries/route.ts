@@ -13,7 +13,7 @@ export async function POST(request: Request) {
   const parsed = enquirySchema.safeParse(body);
   if (!parsed.success)
     return Response.json(
-      { ok: false, errors: parsed.error.flatten().fieldErrors },
+      { ok: false, error: parsed.error.issues[0]?.message, errors: parsed.error.flatten().fieldErrors },
       { status: 400 },
     );
   if (!configured())

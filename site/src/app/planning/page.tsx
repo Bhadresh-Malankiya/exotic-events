@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import Link from "next/link";
 import { getPublicDocument as getDocument } from "@/lib/business/public-content";
 import {
@@ -35,10 +36,10 @@ export default async function Planning() {
         </p>
         <div className="x-actions">
           <a className="x-button x-button-gold" href="#budget">
-            Understand Your Budget ↓
+            Understand Your Budget <LineIcon name="down"/>
           </a>
           <Link className="x-button x-button-outline" href="/gallery">
-            Build Your Inspiration Board ↗
+            Build Your Inspiration Board <LineIcon name="diagonal"/>
           </Link>
         </div>
       </section>

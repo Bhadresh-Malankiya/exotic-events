@@ -1,4 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
+import { ResponsivePhoto } from "@/components/ui/ResponsivePhoto";
+import { LineIcon } from "@/components/ui/LineIcon";
+
+import { JsonLd } from "@/components/seo/JsonLd";
+import { serviceJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import Link from "next/link";
 import { getWorkspace } from "@/lib/business/store";
 import { EstimateCalculator } from "@/components/portfolio/EstimateCalculator";
@@ -58,12 +62,26 @@ export default async function Service({
     .slice(0, 4);
   return (
     <div className="exotic-site p-site">
+      <JsonLd
+        data={serviceJsonLd({
+          name: s.title,
+          description: s.description,
+          slug: s.slug,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: s.title, path: `/services/${s.slug}` },
+        ])}
+      />
       <PortfolioHeader brand={c.brand} />
       <section className="p-service-hero">
-        <img src={s.image} alt={s.alt} />
+        <ResponsivePhoto src={s.image} alt={s.alt} />
         <div>
           <Link href="/services" className="p-back">
-            ← All services
+            <LineIcon name="back" /> All services
           </Link>
           <p className="x-kicker">{s.title}</p>
           <h1>{s.headline}</h1>
@@ -78,7 +96,7 @@ export default async function Service({
               href={`/gallery?category=${encodeURIComponent(s.category)}`}
               className="x-button x-button-glass"
             >
-              Explore Related Photos ↗
+              Explore Related Photos <LineIcon name="diagonal" />
             </Link>
           </div>
         </div>
@@ -103,7 +121,10 @@ export default async function Service({
             <article key={i}>
               <span>0{i + 1}</span>
               <h3>{item.title}</h3>
-              <p>{item.description}</p>
+              <details>
+                <summary>What’s included</summary>
+                <p>{item.description}</p>
+              </details>
             </article>
           ))}
         </div>
@@ -118,7 +139,7 @@ export default async function Service({
           </h2>
           <p>{s.deliverables}</p>
           <Link href="/planning#budget" className="x-text-link">
-            See our approach to budgets ↗
+            See our approach to budgets <LineIcon name="diagonal" />
           </Link>
         </div>
         <div>
@@ -126,8 +147,10 @@ export default async function Service({
             <article key={i}>
               <span>0{i + 1}</span>
               <div>
-                <h3>{b.title}</h3>
-                <p>{b.description}</p>
+                <details>
+                  <summary>{b.title}</summary>
+                  <p>{b.description}</p>
+                </details>
               </div>
             </article>
           ))}
@@ -146,13 +169,13 @@ export default async function Service({
               className="x-text-link"
               href={`/gallery?category=${encodeURIComponent(s.category)}`}
             >
-              View the full collection ↗
+              View the full collection <LineIcon name="diagonal" />
             </Link>
           </div>
           <div className="p-related-grid">
             {related.map((i) => (
               <Link href={`/gallery?photo=${i.id}`} key={i.id}>
-                <img src={i.image} alt={i.alt} loading="lazy" />
+                <ResponsivePhoto src={i.image} alt={i.alt} loading="lazy" />
                 <span>{i.completed ? "Our work" : "Inspiration"}</span>
                 <h3>{i.title}</h3>
               </Link>
